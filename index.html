@@ -2,80 +2,50 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Espaço Vip</title>
 
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#111111">
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#111111" />
 
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #f5f5f5;
       margin: 0;
-      padding: 0;
+      background: #f5f5f5;
+      text-align: center;
     }
-
     header {
       background: #111;
       color: #fff;
-      padding: 15px;
-      text-align: center;
+      padding: 20px;
     }
-
-    section {
-      padding: 15px;
+    main {
+      padding: 30px;
     }
-
-    .card {
-      background: #fff;
-      padding: 15px;
-      margin-bottom: 15px;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-
     button {
-      width: 100%;
-      padding: 12px;
-      border: none;
-      border-radius: 6px;
-      background: #000;
-      color: #fff;
+      padding: 15px 25px;
       font-size: 16px;
+      border: none;
+      background: #111;
+      color: #fff;
+      border-radius: 8px;
       cursor: pointer;
-      margin-top: 10px;
-    }
-
-    button:hover {
-      background: #333;
     }
   </style>
 </head>
-<body>
 
+<body>
   <header>
     <h1>Espaço Vip</h1>
-    <p>Agendamentos • Ofertas • PIX</p>
+    <p>Cuidando da sua beleza e bem-estar</p>
   </header>
 
-  <section>
-    <div class="card">
-      <h2>📅 Agendar horário</h2>
-      <button onclick="alert('Agendamento em breve')">Agendar</button>
-    </div>
+  <main>
+    <p>Agendamentos, ofertas e atendimento exclusivo.</p>
+    <button>Agendar horário</button>
+  </main>
 
-    <div class="card">
-      <h2>🔥 Oferta do dia</h2>
-      <button onclick="alert('Oferta ativada')">Ativar oferta</button>
-    </div>
-
-    <div class="card">
-      <h2>💳 Pagamento PIX</h2>
-      <p>PIX: <strong>41992297612</strong></p>
-      <button onclick="alert('PIX copiado')">Copiar PIX</button>
-    </div>
-  </section>
-
+  <script src="service-worker.js"></script>
 </body>
 </html>
