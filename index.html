@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Espaço Vip</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: #111;
+      color: #fff;
+      padding: 15px;
+      text-align: center;
+    }
+
+    section {
+      padding: 15px;
+    }
+
+    .card {
+      background: #fff;
+      padding: 15px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      background: #000;
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Espaço Vip</h1>
+    <p>Agendamentos • Ofertas • PIX</p>
+  </header>
+
+  <section>
+    <div class="card">
+      <h2>📅 Agendar horário</h2>
+      <button onclick="alert('Agendamento em breve')">Agendar</button>
+    </div>
+
+    <div class="card">
+      <h2>🔥 Oferta do dia</h2>
+      <button onclick="alert('Oferta ativada')">Ativar oferta</button>
+    </div>
+
+    <div class="card">
+      <h2>💳 Pagamento PIX</h2>
+      <p>PIX: <strong>41992297612</strong></p>
+      <button onclick="alert('PIX copiado')">Copiar PIX</button>
+    </div>
+  </section>
+
+</body>
+</html>
