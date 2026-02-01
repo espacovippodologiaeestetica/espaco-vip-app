@@ -1,12 +1,10 @@
 {
   "name": "Espaço Vip",
   "short_name": "Espaço Vip",
-  "start_url": "./",
-  "scope": "./",
+  "start_url": ".",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#111111",
-  "description": "Agendamentos, ofertas e PIX",
+  "theme_color": "#b89b5e",
   "icons": [
     {
       "src": "icon-192.png",
