@@ -134,14 +134,11 @@ document.getElementById("formAgendamento").addEventListener("submit", function(e
   const data = document.getElementById("data").value;
   const hora = document.getElementById("hora").value;
 
-  if (!servicoRaw) {
-    alert("Selecione um serviço.");
-    return;
-  }
+  if (!servicoRaw) { alert("Selecione um serviço."); return; }
 
   const [servico, precoStr] = servicoRaw.split("|");
   const preco = Number(precoStr || 0);
-  const sinal = Math.round(preco * 0.3 * 100) / 100;
+  const sinal = Math.round(preco * 0.30 * 100) / 100;
 
   const telefone = "5541992297612";
   const pix = "41992297612";
@@ -152,13 +149,12 @@ document.getElementById("formAgendamento").addEventListener("submit", function(e
     📅 ${data} ⏰ ${hora}\n\n +
     💰 Valor do serviço: R$ ${preco}\n +
     ✅ Sinal (30%): R$ ${sinal}\n\n +
-    `⏰ Cancelamentos devem ser avisados com no mínimo 2 horas. ` +
-    Caso não avise ou não compareça, o sinal é perdido.\n\n +
+    ⏰ Cancelamentos devem ser avisados com no mínimo 2 horas. Caso não avise ou não compareça, o sinal é perdido.\n\n +
     💳 PIX: ${pix};
 
   const link = https://wa.me/${telefone}?text=${encodeURIComponent(mensagem)};
 
-  // ✅ Mais confiável que window.open (evita bloqueio de pop-up)
+  // ✅ Não bloqueia (funciona no botão "de cima")
   window.location.href = link;
 });
 
