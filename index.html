@@ -126,50 +126,70 @@
 </div>
 
 <script>
-document.getElementById("formAgendamento").addEventListener("submit", function(e){
-  e.preventDefault();
-
-  const nome = document.getElementById("nome").value.trim();
-  const servicoRaw = document.getElementById("servico").value;
-  const data = document.getElementById("data").value;
-  const hora = document.getElementById("hora").value;
-
-  if (!servicoRaw) { alert("Selecione um serviço."); return; }
-
-  const [servico, precoStr] = servicoRaw.split("|");
-  const preco = Number(precoStr || 0);
-  const sinal = Math.round(preco * 0.30 * 100) / 100;
-
   const telefone = "5541992297612";
   const pix = "41992297612";
 
-  const mensagem =
-    Olá! Meu nome é ${nome}.\n +
-    Gostaria de agendar *${servico}*.\n +
-    📅 ${data} ⏰ ${hora}\n\n +
-    💰 Valor do serviço: R$ ${preco}\n +
-    ✅ Sinal (30%): R$ ${sinal}\n\n +
-    ⏰ Cancelamentos devem ser avisados com no mínimo 2 horas. Caso não avise ou não compareça, o sinal é perdido.\n\n +
-    💳 PIX: ${pix};
-
-  const link = https://wa.me/${telefone}?text=${encodeURIComponent(mensagem)};
-
-  // ✅ Não bloqueia (funciona no botão "de cima")
-  window.location.href = link;
-});
-
-// Copiar PIX
-const btnPix = document.getElementById("btnCopiarPix");
-const pixStatus = document.getElementById("pixStatus");
-btnPix.addEventListener("click", async ()=>{
-  try{
-    await navigator.clipboard.writeText("41992297612");
-    pixStatus.style.display="block";
-    setTimeout(()=>pixStatus.style.display="none",1500);
-  }catch{
-    alert("Copie manualmente: 41992297612");
+  function formatBRL(v){
+    return v.toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
   }
-});
+
+  function montarMensagem(){
+    const nome = document.getElementById("nome").value.trim();
+    const servicoRaw = document.getElementById("servico").value;
+    const data = document.getElementById("data").value;
+    const hora = document.getElementById("hora").value;
+
+    if (!nome || !servicoRaw || !data || !hora) {
+      alert("Preencha nome, serviço, data e horário.");
+      return null;
+    }
+
+    const [servico, precoStr] = servicoRaw.split("|");
+    const preco = Number(precoStr || 0);
+
+    let blocoValor = "";
+    if (preco > 0) {
+      const sinal = Math.round(preco * 0.30 * 100) / 100;
+      blocoValor =
+        💰 Valor do serviço: ${formatBRL(preco)}\n +
+        ✅ Sinal (30%): ${formatBRL(sinal)}\n\n;
+    } else {
+      blocoValor = 💰 Valor: a combinar (avaliação)\n\n;
+    }
+
+    return (
+      Olá! Meu nome é ${nome}.\n +
+      Gostaria de agendar *${servico}*.\n +
+      📅 Data: ${data}\n +
+      🕒 Horário: ${hora}\n\n +
+      blocoValor +
+      ⏰ Cancelamentos devem ser avisados com no mínimo 2 horas. Caso não avise ou não compareça, o sinal é perdido.\n\n +
+      💳 PIX: ${pix}
+    );
+  }
+
+  // Botão do Whats
+  document.getElementById("btnWhats").addEventListener("click", () => {
+    const mensagem = montarMensagem();
+    if (!mensagem) return;
+
+    const link = https://wa.me/${telefone}?text=${encodeURIComponent(mensagem)};
+
+    // mais confiável que href em alguns Android:
+    window.location.assign(link);
+  });
+
+  // Copiar PIX
+  document.getElementById("btnCopiarPix").addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(pix);
+      const status = document.getElementById("pixStatus");
+      status.style.display = "block";
+      setTimeout(() => (status.style.display = "none"), 1500);
+    } catch {
+      alert("Copie manualmente: " + pix);
+    }
+  });
 </script>
 
 </body>
