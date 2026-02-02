@@ -159,36 +159,51 @@
     </form>
   </div>
 
-  <script>
-    document.getElementById("formAgendamento").addEventListener("submit", function(event) {
-      event.preventDefault(); // NÃO deixa limpar o formulário
+ <script>
+  document.getElementById("formAgendamento").addEventListener("submit", function(event) {
+    event.preventDefault();
 
-      const nome = document.getElementById("nome").value;
-      const servico = document.getElementById("servico").value;
-      const data = document.getElementById("data").value;
-      const hora = document.getElementById("hora").value;
+    const nome = document.getElementById("nome").value.trim();
+    const servicoRaw = document.getElementById("servico").value;
+    const data = document.getElementById("data").value;
+    const hora = document.getElementById("hora").value;
 
-      const telefone = "5541992297612"; // NÚMERO ANTIGO
+    // servicoRaw vem no formato: "Nome do serviço|preço"
+    const [servicoNome, precoStr] = servicoRaw.split("|");
+    const preco = Number(precoStr || 0);
 
-      const mensagem =
-  "Olá! Meu nome é " + nome +
-  ". Gostaria de agendar " + servico +
-  " para o dia " + data +
-  " às " + hora + "." +
-  "\n\n" +
-  "✅ Para confirmar o agendamento, é necessário sinal de 30% do valor do serviço." +
-  "\n" +
-  "⏰ Cancelamentos devem ser avisados com no mínimo 2 horas de antecedência. " +
-  "Caso não avise ou não compareça, o sinal é perdido." +
-  "\n\n" +
-  "💳 PIX: 41992297612";
+    const telefone = "5541992297612"; // WhatsApp (41) 99229-7612
+    const pix = "41992297612";
 
-      const linkWhats =
-        "https://wa.me/" + telefone + "?text=" + encodeURIComponent(mensagem);
+    const formatBRL = (v) =>
+      v.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 
-      window.open(linkWhats, "_blank");
-    });
-  </script>
+    let blocoValor = "";
+    if (preco > 0) {
+      const sinal = Math.round(preco * 0.30 * 100) / 100;
+      blocoValor =
+        💰 Valor do serviço: ${formatBRL(preco)}\n +
+        ✅ Sinal (30%): ${formatBRL(sinal)}\n;
+    } else {
+      blocoValor =
+        💰 Valor: a combinar (avaliação)\n;
+    }
 
+    const mensagem =
+      Olá! Meu nome é ${nome}.\n +
+      Gostaria de agendar: *${servicoNome}*\n +
+      📅 Data: ${data}\n +
+      🕒 Horário: ${hora}\n\n +
+      blocoValor +
+      `⏰ Cancelamentos devem ser avisados com no mínimo 2 horas de antecedência. ` +
+      Caso não avise ou não compareça, o sinal é perdido.\n\n +
+      💳 PIX: ${pix};
+
+    const linkWhats =
+      https://wa.me/${telefone}?text=${encodeURIComponent(mensagem)};
+
+    window.open(linkWhats, "_blank");
+  });
+</script>
 </body>
 </html>
