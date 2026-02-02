@@ -77,13 +77,77 @@
       <input type="text" id="nome" required>
 
       <label>Serviço</label>
-      <select id="servico" required>
-        <option value="">Selecione</option>
-        <option value="Podologia">Podologia</option>
-        <option value="Manicure">Manicure</option>
-        <option value="Pedicure">Pedicure</option>
-        <option value="Estética">Estética</option>
-      </select>
+     <select id="servico" required>
+  <option value="">Selecione</option>
+
+  <optgroup label="Unhas">
+    <option value="Manicure|30">Manicure — R$ 30</option>
+    <option value="Pedicure|40">Pedicure — R$ 40</option>
+    <option value="Manicure e Pedicure|60">Manicure e Pedicure — R$ 60</option>
+    <option value="Manicure com francesinha|32">Manicure com francesinha — R$ 32</option>
+    <option value="Manicure com francesinha e decoração|35">Manicure com francesinha e decoração — R$ 35</option>
+    <option value="Pedicure com francesinha|42">Pedicure com francesinha — R$ 42</option>
+    <option value="Pedicure com francesinha e decoração|45">Pedicure com francesinha e decoração — R$ 45</option>
+    <option value="Esmaltação em gel mão (inclui manicure)|65">Esmaltação em gel mão (inclui manicure) — R$ 65</option>
+    <option value="Esmaltação em gel pedicure (inclui pedicure)|75">Esmaltação em gel pedicure (inclui pedicure) — R$ 75</option>
+    <option value="Esmaltação em gel pé e mão (inclui serviços)|130">Esmaltação em gel pé e mão (inclui serviços) — R$ 130</option>
+    <option value="SPA dos pés|100">SPA dos pés — R$ 100</option>
+  </optgroup>
+
+  <optgroup label="Sobrancelhas e cílios">
+    <option value="Design de sobrancelhas|30">Design de sobrancelhas — R$ 30</option>
+    <option value="Design de sobrancelhas + Henna|50">Design de sobrancelhas + Henna — R$ 50</option>
+    <option value="Micropigmentação de sobrancelhas (com retoque)|450">Micropigmentação de sobrancelhas (com retoque) — R$ 450</option>
+    <option value="Brow lamination|120">Brow lamination — R$ 120</option>
+    <option value="Lash lifting|120">Lash lifting — R$ 120</option>
+    <option value="Cílios fio a fio|120">Cílios fio a fio — R$ 120</option>
+    <option value="Cílios brasileiro|140">Cílios brasileiro — R$ 140</option>
+    <option value="Cílios Fox|145">Cílios Fox — R$ 145</option>
+    <option value="Cílios mega volume|170">Cílios mega volume — R$ 170</option>
+    <option value="Cílios volume russo|190">Cílios volume russo — R$ 190</option>
+  </optgroup>
+
+  <optgroup label="Pele / Depilação">
+    <option value="Limpeza de pele intensa|120">Limpeza de pele intensa — R$ 120</option>
+    <option value="Limpeza de pele ultrassônica|180">Limpeza de pele ultrassônica — R$ 180</option>
+
+    <option value="Depilação completa (½ perna, íntima, axilas)|130">Depilação completa — R$ 130</option>
+    <option value="Depilação axilas|25">Depilação axilas — R$ 25</option>
+    <option value="Depilação ½ perna|25">Depilação ½ perna — R$ 25</option>
+    <option value="Depilação coxa e perna|50">Depilação coxa e perna — R$ 50</option>
+    <option value="Depilação íntima|60">Depilação íntima — R$ 60</option>
+    <option value="Depilação buço|15">Depilação buço — R$ 15</option>
+    <option value="Depilação braço|40">Depilação braço — R$ 40</option>
+
+    <option value="Depilação abdômen masculino|30">Depilação abdômen masculino — R$ 30</option>
+    <option value="Depilação peitoral masculino|40">Depilação peitoral masculino — R$ 40</option>
+    <option value="Depilação pernas masculino|60">Depilação pernas masculino — R$ 60</option>
+    <option value="Depilação axilas masculino|40">Depilação axilas masculino — R$ 40</option>
+    <option value="Depilação braço masculino|50">Depilação braço masculino — R$ 50</option>
+    <option value="Depilação costas masculino|60">Depilação costas masculino — R$ 60</option>
+  </optgroup>
+
+  <optgroup label="Massagens / Terapias">
+    <option value="Massagem relaxante feminino|120">Massagem relaxante feminino — R$ 120</option>
+    <option value="Massagem relaxante masculino|160">Massagem relaxante masculino — R$ 160</option>
+    <option value="Massagem terapêutica|180">Massagem terapêutica — R$ 180</option>
+    <option value="Drenagem linfática|120">Drenagem linfática — R$ 120</option>
+    <option value="Massagem modeladora localizada|80">Massagem modeladora localizada — R$ 80</option>
+    <option value="Ventosa terapia|70">Ventosa terapia — R$ 70</option>
+    <option value="Cone hindu|65">Cone hindu — R$ 65</option>
+  </optgroup>
+
+  <optgroup label="Bronzeamento">
+    <option value="Bronzeamento artificial|130">Bronzeamento artificial — R$ 130</option>
+  </optgroup>
+
+  <optgroup label="Podologia">
+    <option value="Podologia calos e fissuras|80">Podologia calos e fissuras — R$ 80</option>
+    <option value="Podologia unha encravada sem infecção|150">Podologia unha encravada sem infecção — R$ 150</option>
+    <option value="Podologia com infecção (somente avaliação)|0">Podologia com infecção (avaliação) — valor a combinar</option>
+    <option value="Podologia micose (avaliação)|0">Podologia micose (avaliação) — valor a combinar</option>
+  </optgroup>
+</select>
 
       <label>Data</label>
       <input type="date" id="data" required>
