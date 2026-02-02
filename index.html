@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Espaço Vip</title>
 
   <style>
@@ -10,7 +10,7 @@
       margin: 0;
       font-family: Arial, sans-serif;
       background: #0f0f10;
-      color: #fff;
+      color: #ffffff;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -28,7 +28,7 @@
 
     h1 {
       text-align: center;
-      margin-bottom: 5px;
+      margin-bottom: 4px;
     }
 
     p {
@@ -50,7 +50,7 @@
       border-radius: 10px;
       border: none;
       background: #0f0f10;
-      color: #fff;
+      color: #ffffff;
     }
 
     button {
@@ -62,10 +62,6 @@
       font-size: 16px;
       font-weight: bold;
       cursor: pointer;
-    }
-
-    button:hover {
-      opacity: 0.9;
     }
   </style>
 </head>
@@ -100,24 +96,26 @@
   </div>
 
   <script>
-    document.getElementById("formAgendamento").addEventListener("submit", function(e) {
-      e.preventDefault(); // 🔴 impede limpar o formulário
+    document.getElementById("formAgendamento").addEventListener("submit", function(event) {
+      event.preventDefault(); // NÃO deixa limpar o formulário
 
       const nome = document.getElementById("nome").value;
       const servico = document.getElementById("servico").value;
       const data = document.getElementById("data").value;
       const hora = document.getElementById("hora").value;
 
-      const telefone = "5541992643933"; // SEU WHATSAPP
+      const telefone = "5541992297612"; // NÚMERO ANTIGO
 
       const mensagem =
-        `Olá! Meu nome é ${nome}. Gostaria de agendar ${servico} ` +
-        para o dia ${data} às ${hora}.;
+        "Olá! Meu nome é " + nome +
+        ". Gostaria de agendar " + servico +
+        " para o dia " + data +
+        " às " + hora + ".";
 
-      const url =
-        https://api.whatsapp.com/send?phone=${telefone}&text=${encodeURIComponent(mensagem)};
+      const linkWhats =
+        "https://wa.me/" + telefone + "?text=" + encodeURIComponent(mensagem);
 
-      window.location.href = url;
+      window.open(linkWhats, "_blank");
     });
   </script>
 
