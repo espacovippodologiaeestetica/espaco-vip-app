@@ -117,9 +117,8 @@
 
       const mensagem = Olá! Meu nome é ${nome}. Gostaria de agendar ${servico} para o dia ${data} às ${hora}.;
 
-      window.open(
-        https://wa.me/${telefone}?text=${encodeURIComponent(mensagem)},
-        "_blank"
+      const url = https://api.whatsapp.com/send?phone=${telefone}&text=${encodeURIComponent(mensagem)};
+window.location.href = url;
       );
     });
   </script>
