@@ -6,204 +6,168 @@
   <title>Espaço Vip</title>
 
   <style>
-    body {
-      margin: 0;
+    body{
+      margin:0;
       font-family: Arial, sans-serif;
-      background: #0f0f10;
-      color: #ffffff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
+      background:#0f0f10;
+      color:#fff;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      min-height:100vh;
+    }
+    .card{
+      background:#151517;
+      padding:24px;
+      border-radius:18px;
+      width:100%;
+      max-width:420px;
+      box-shadow:0 18px 45px rgba(0,0,0,.45);
+    }
+    h1{text-align:center;margin-bottom:4px;}
+    p.sub{text-align:center;color:#b7b7bd;font-size:14px;margin-bottom:18px;}
+
+    label{font-size:13px;color:#b7b7bd;}
+    input,select{
+      width:100%;
+      padding:12px;
+      margin:6px 0 14px;
+      border-radius:10px;
+      border:none;
+      background:#0f0f10;
+      color:#fff;
+    }
+    button{
+      width:100%;
+      padding:14px;
+      background:#c9a24a;
+      border:none;
+      border-radius:12px;
+      font-size:16px;
+      font-weight:bold;
+      cursor:pointer;
     }
 
-    .card {
-      background: #151517;
-      padding: 24px;
-      border-radius: 18px;
-      width: 100%;
-      max-width: 380px;
-      box-shadow: 0 18px 45px rgba(0,0,0,.45);
+    .pix-box{
+      margin-top:18px;
+      padding:14px;
+      border-radius:14px;
+      background:#0f0f10;
+      border:1px solid rgba(255,255,255,.08);
     }
-
-    h1 {
-      text-align: center;
-      margin-bottom: 4px;
+    .pix-row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
     }
-
-    p {
-      text-align: center;
-      color: #b7b7bd;
-      font-size: 14px;
-      margin-bottom: 20px;
-    }
-
-    label {
-      font-size: 13px;
-      color: #b7b7bd;
-    }
-
-    input, select {
-      width: 100%;
-      padding: 12px;
-      margin: 6px 0 14px;
-      border-radius: 10px;
-      border: none;
-      background: #0f0f10;
-      color: #ffffff;
-    }
-
-    button {
-      width: 100%;
-      padding: 14px;
-      background: #c9a24a;
-      border: none;
-      border-radius: 12px;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
+    .pix-key{color:#b7b7bd;font-size:14px;margin-top:4px;}
+    .pix-status{
+      margin-top:10px;
+      font-size:13px;
+      color:#7be495;
+      display:none;
     }
   </style>
 </head>
 
 <body>
 
-  <div class="card">
-    <h1>Espaço Vip</h1>
-    <p>Cuidando da sua beleza e bem-estar</p>
+<div class="card">
+  <h1>Espaço Vip</h1>
+  <p class="sub">Cuidando da sua beleza e bem-estar</p>
 
-    <form id="formAgendamento">
-      <label>Nome</label>
-      <input type="text" id="nome" required>
+  <form id="formAgendamento">
+    <label>Nome</label>
+    <input type="text" id="nome" required>
 
-      <label>Serviço</label>
-     <select id="servico" required>
-  <option value="">Selecione</option>
+    <label>Serviço</label>
+    <select id="servico" required>
+      <option value="">Selecione</option>
 
-  <optgroup label="Unhas">
-    <option value="Manicure|30">Manicure — R$ 30</option>
-    <option value="Pedicure|40">Pedicure — R$ 40</option>
-    <option value="Manicure e Pedicure|60">Manicure e Pedicure — R$ 60</option>
-    <option value="Manicure com francesinha|32">Manicure com francesinha — R$ 32</option>
-    <option value="Manicure com francesinha e decoração|35">Manicure com francesinha e decoração — R$ 35</option>
-    <option value="Pedicure com francesinha|42">Pedicure com francesinha — R$ 42</option>
-    <option value="Pedicure com francesinha e decoração|45">Pedicure com francesinha e decoração — R$ 45</option>
-    <option value="Esmaltação em gel mão (inclui manicure)|65">Esmaltação em gel mão (inclui manicure) — R$ 65</option>
-    <option value="Esmaltação em gel pedicure (inclui pedicure)|75">Esmaltação em gel pedicure (inclui pedicure) — R$ 75</option>
-    <option value="Esmaltação em gel pé e mão (inclui serviços)|130">Esmaltação em gel pé e mão (inclui serviços) — R$ 130</option>
-    <option value="SPA dos pés|100">SPA dos pés — R$ 100</option>
-  </optgroup>
+      <optgroup label="Unhas">
+        <option value="Manicure|30">Manicure — R$30</option>
+        <option value="Pedicure|40">Pedicure — R$40</option>
+        <option value="Manicure e Pedicure|60">Manicure + Pedicure — R$60</option>
+        <option value="Esmaltação em gel mão|65">Gel mão — R$65</option>
+        <option value="Esmaltação em gel pé|75">Gel pé — R$75</option>
+        <option value="Esmaltação em gel pé e mão|130">Gel pé e mão — R$130</option>
+        <option value="SPA dos pés|100">SPA dos pés — R$100</option>
+      </optgroup>
 
-  <optgroup label="Sobrancelhas e cílios">
-    <option value="Design de sobrancelhas|30">Design de sobrancelhas — R$ 30</option>
-    <option value="Design de sobrancelhas + Henna|50">Design de sobrancelhas + Henna — R$ 50</option>
-    <option value="Micropigmentação de sobrancelhas (com retoque)|450">Micropigmentação de sobrancelhas (com retoque) — R$ 450</option>
-    <option value="Brow lamination|120">Brow lamination — R$ 120</option>
-    <option value="Lash lifting|120">Lash lifting — R$ 120</option>
-    <option value="Cílios fio a fio|120">Cílios fio a fio — R$ 120</option>
-    <option value="Cílios brasileiro|140">Cílios brasileiro — R$ 140</option>
-    <option value="Cílios Fox|145">Cílios Fox — R$ 145</option>
-    <option value="Cílios mega volume|170">Cílios mega volume — R$ 170</option>
-    <option value="Cílios volume russo|190">Cílios volume russo — R$ 190</option>
-  </optgroup>
+      <optgroup label="Estética / Podologia">
+        <option value="Limpeza de pele intensa|120">Limpeza de pele — R$120</option>
+        <option value="Bronzeamento artificial|130">Bronzeamento — R$130</option>
+        <option value="Podologia calos e fissuras|80">Podologia calos — R$80</option>
+        <option value="Unha encravada sem infecção|150">Unha encravada — R$150</option>
+      </optgroup>
+    </select>
 
-  <optgroup label="Pele / Depilação">
-    <option value="Limpeza de pele intensa|120">Limpeza de pele intensa — R$ 120</option>
-    <option value="Limpeza de pele ultrassônica|180">Limpeza de pele ultrassônica — R$ 180</option>
+    <label>Data</label>
+    <input type="date" id="data" required>
 
-    <option value="Depilação completa (½ perna, íntima, axilas)|130">Depilação completa — R$ 130</option>
-    <option value="Depilação axilas|25">Depilação axilas — R$ 25</option>
-    <option value="Depilação ½ perna|25">Depilação ½ perna — R$ 25</option>
-    <option value="Depilação coxa e perna|50">Depilação coxa e perna — R$ 50</option>
-    <option value="Depilação íntima|60">Depilação íntima — R$ 60</option>
-    <option value="Depilação buço|15">Depilação buço — R$ 15</option>
-    <option value="Depilação braço|40">Depilação braço — R$ 40</option>
+    <label>Horário</label>
+    <input type="time" id="hora" required>
 
-    <option value="Depilação abdômen masculino|30">Depilação abdômen masculino — R$ 30</option>
-    <option value="Depilação peitoral masculino|40">Depilação peitoral masculino — R$ 40</option>
-    <option value="Depilação pernas masculino|60">Depilação pernas masculino — R$ 60</option>
-    <option value="Depilação axilas masculino|40">Depilação axilas masculino — R$ 40</option>
-    <option value="Depilação braço masculino|50">Depilação braço masculino — R$ 50</option>
-    <option value="Depilação costas masculino|60">Depilação costas masculino — R$ 60</option>
-  </optgroup>
+    <button type="submit">Agendar pelo WhatsApp</button>
+  </form>
 
-  <optgroup label="Massagens / Terapias">
-    <option value="Massagem relaxante feminino|120">Massagem relaxante feminino — R$ 120</option>
-    <option value="Massagem relaxante masculino|160">Massagem relaxante masculino — R$ 160</option>
-    <option value="Massagem terapêutica|180">Massagem terapêutica — R$ 180</option>
-    <option value="Drenagem linfática|120">Drenagem linfática — R$ 120</option>
-    <option value="Massagem modeladora localizada|80">Massagem modeladora localizada — R$ 80</option>
-    <option value="Ventosa terapia|70">Ventosa terapia — R$ 70</option>
-    <option value="Cone hindu|65">Cone hindu — R$ 65</option>
-  </optgroup>
-
-  <optgroup label="Bronzeamento">
-    <option value="Bronzeamento artificial|130">Bronzeamento artificial — R$ 130</option>
-  </optgroup>
-
-  <optgroup label="Podologia">
-    <option value="Podologia calos e fissuras|80">Podologia calos e fissuras — R$ 80</option>
-    <option value="Podologia unha encravada sem infecção|150">Podologia unha encravada sem infecção — R$ 150</option>
-    <option value="Podologia com infecção (somente avaliação)|0">Podologia com infecção (avaliação) — valor a combinar</option>
-    <option value="Podologia micose (avaliação)|0">Podologia micose (avaliação) — valor a combinar</option>
-  </optgroup>
-</select>
-
-      <label>Data</label>
-      <input type="date" id="data" required>
-
-      <label>Horário</label>
-      <input type="time" id="hora" required>
-
-      <button type="submit">Agendar pelo WhatsApp</button>
-    </form>
+  <!-- PIX -->
+  <div class="pix-box">
+    <div class="pix-row">
+      <div>
+        <strong>PIX (copiar)</strong>
+        <div class="pix-key" id="pixChave">41992297612</div>
+      </div>
+      <button type="button" id="btnCopiarPix">Copiar</button>
+    </div>
+    <div class="pix-status" id="pixStatus">PIX copiado ✅</div>
   </div>
+</div>
 
- <script>
-  document.getElementById("formAgendamento").addEventListener("submit", function(event) {
-    event.preventDefault();
+<script>
+document.getElementById("formAgendamento").addEventListener("submit", function(e){
+  e.preventDefault();
 
-    const nome = document.getElementById("nome").value.trim();
-    const servicoRaw = document.getElementById("servico").value;
-    const data = document.getElementById("data").value;
-    const hora = document.getElementById("hora").value;
+  const nome = document.getElementById("nome").value;
+  const servicoRaw = document.getElementById("servico").value;
+  const data = document.getElementById("data").value;
+  const hora = document.getElementById("hora").value;
 
-    // servicoRaw vem no formato: "Nome do serviço|preço"
-    const [servicoNome, precoStr] = servicoRaw.split("|");
-    const preco = Number(precoStr || 0);
+  const [servico, precoStr] = servicoRaw.split("|");
+  const preco = Number(precoStr || 0);
+  const sinal = Math.round(preco * 0.3 * 100) / 100;
 
-    const telefone = "5541992297612"; // WhatsApp (41) 99229-7612
-    const pix = "41992297612";
+  const telefone = "5541992297612";
+  const pix = "41992297612";
 
-    const formatBRL = (v) =>
-      v.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+  const mensagem =
+    Olá! Meu nome é ${nome}.\n +
+    Gostaria de agendar *${servico}*.\n +
+    📅 ${data} ⏰ ${hora}\n\n +
+    💰 Valor do serviço: R$ ${preco}\n +
+    ✅ Sinal (30%): R$ ${sinal}\n\n +
+    `⏰ Cancelamentos devem ser avisados com no mínimo 2 horas. ` +
+    Caso não avise ou não compareça, o sinal é perdido.\n\n +
+    💳 PIX: ${pix};
 
-    let blocoValor = "";
-    if (preco > 0) {
-      const sinal = Math.round(preco * 0.30 * 100) / 100;
-      blocoValor =
-        💰 Valor do serviço: ${formatBRL(preco)}\n +
-        ✅ Sinal (30%): ${formatBRL(sinal)}\n;
-    } else {
-      blocoValor =
-        💰 Valor: a combinar (avaliação)\n;
-    }
+  const link = https://wa.me/${telefone}?text=${encodeURIComponent(mensagem)};
+  window.open(link, "_blank");
+});
 
-    const mensagem =
-      Olá! Meu nome é ${nome}.\n +
-      Gostaria de agendar: *${servicoNome}*\n +
-      📅 Data: ${data}\n +
-      🕒 Horário: ${hora}\n\n +
-      blocoValor +
-      `⏰ Cancelamentos devem ser avisados com no mínimo 2 horas de antecedência. ` +
-      Caso não avise ou não compareça, o sinal é perdido.\n\n +
-      💳 PIX: ${pix};
-
-    const linkWhats =
-      https://wa.me/${telefone}?text=${encodeURIComponent(mensagem)};
-
-    window.open(linkWhats, "_blank");
-  });
+// Copiar PIX
+const btnPix = document.getElementById("btnCopiarPix");
+const pixStatus = document.getElementById("pixStatus");
+btnPix.addEventListener("click", async ()=>{
+  try{
+    await navigator.clipboard.writeText("41992297612");
+    pixStatus.style.display="block";
+    setTimeout(()=>pixStatus.style.display="none",1500);
+  }catch{
+    alert("Copie manualmente: 41992297612");
+  }
+});
 </script>
+
 </body>
 </html>
