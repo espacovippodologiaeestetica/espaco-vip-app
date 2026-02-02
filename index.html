@@ -107,10 +107,17 @@
       const telefone = "5541992297612"; // NÚMERO ANTIGO
 
       const mensagem =
-        "Olá! Meu nome é " + nome +
-        ". Gostaria de agendar " + servico +
-        " para o dia " + data +
-        " às " + hora + ".";
+  "Olá! Meu nome é " + nome +
+  ". Gostaria de agendar " + servico +
+  " para o dia " + data +
+  " às " + hora + "." +
+  "\n\n" +
+  "✅ Para confirmar o agendamento, é necessário sinal de 30% do valor do serviço." +
+  "\n" +
+  "⏰ Cancelamentos devem ser avisados com no mínimo 2 horas de antecedência. " +
+  "Caso não avise ou não compareça, o sinal é perdido." +
+  "\n\n" +
+  "💳 PIX: 41992297612";
 
       const linkWhats =
         "https://wa.me/" + telefone + "?text=" + encodeURIComponent(mensagem);
