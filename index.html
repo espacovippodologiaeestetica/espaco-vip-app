@@ -1,196 +1,194 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Espaço Vip</title>
 
-  <style>
-    body{
-      margin:0;
-      font-family: Arial, sans-serif;
-      background:#0f0f10;
-      color:#fff;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      min-height:100vh;
-    }
-    .card{
-      background:#151517;
-      padding:24px;
-      border-radius:18px;
-      width:100%;
-      max-width:420px;
-      box-shadow:0 18px 45px rgba(0,0,0,.45);
-    }
-    h1{text-align:center;margin-bottom:4px;}
-    p.sub{text-align:center;color:#b7b7bd;font-size:14px;margin-bottom:18px;}
-
-    label{font-size:13px;color:#b7b7bd;}
-    input,select{
-      width:100%;
-      padding:12px;
-      margin:6px 0 14px;
-      border-radius:10px;
-      border:none;
-      background:#0f0f10;
-      color:#fff;
-    }
-    button{
-      width:100%;
-      padding:14px;
-      background:#c9a24a;
-      border:none;
-      border-radius:12px;
-      font-size:16px;
-      font-weight:bold;
-      cursor:pointer;
-    }
-
-    .pix-box{
-      margin-top:18px;
-      padding:14px;
-      border-radius:14px;
-      background:#0f0f10;
-      border:1px solid rgba(255,255,255,.08);
-    }
-    .pix-row{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-    }
-    .pix-key{color:#b7b7bd;font-size:14px;margin-top:4px;}
-    .pix-status{
-      margin-top:10px;
-      font-size:13px;
-      color:#7be495;
-      display:none;
-    }
-  </style>
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#151517" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
-
-<div class="card">
-  <h1>Espaço Vip</h1>
-  <p class="sub">Cuidando da sua beleza e bem-estar</p>
-
-  <form id="formAgendamento">
-    <label>Nome</label>
-    <input type="text" id="nome" required>
-
-    <label>Serviço</label>
-    <select id="servico" required>
-      <option value="">Selecione</option>
-
-      <optgroup label="Unhas">
-        <option value="Manicure|30">Manicure — R$30</option>
-        <option value="Pedicure|40">Pedicure — R$40</option>
-        <option value="Manicure e Pedicure|60">Manicure + Pedicure — R$60</option>
-        <option value="Esmaltação em gel mão|65">Gel mão — R$65</option>
-        <option value="Esmaltação em gel pé|75">Gel pé — R$75</option>
-        <option value="Esmaltação em gel pé e mão|130">Gel pé e mão — R$130</option>
-        <option value="SPA dos pés|100">SPA dos pés — R$100</option>
-      </optgroup>
-
-      <optgroup label="Estética / Podologia">
-        <option value="Limpeza de pele intensa|120">Limpeza de pele — R$120</option>
-        <option value="Bronzeamento artificial|130">Bronzeamento — R$130</option>
-        <option value="Podologia calos e fissuras|80">Podologia calos — R$80</option>
-        <option value="Unha encravada sem infecção|150">Unha encravada — R$150</option>
-      </optgroup>
-    </select>
-
-    <label>Data</label>
-    <input type="date" id="data" required>
-
-    <label>Horário</label>
-    <input type="time" id="hora" required>
-
-    <button type="button" id="btnWhats">Agendar pelo WhatsApp</button>
-  </form>
-
-  <!-- PIX -->
-  <div class="pix-box">
-    <div class="pix-row">
-      <div>
-        <strong>PIX (copiar)</strong>
-        <div class="pix-key" id="pixChave">41992297612</div>
-      </div>
-      <button type="button" id="btnCopiarPix">Copiar</button>
+  <header class="top">
+    <div class="brand">
+      <!-- ATALHO SECRETO NO TÍTULO -->
+      <div class="title" id="secretAdmin">Espaço Vip</div>
+      <div class="subtitle">Fidelidade & Benefícios Exclusivos</div>
     </div>
-    <div class="pix-status" id="pixStatus">PIX copiado ✅</div>
-  </div>
-</div>
+  </header>
 
-<script>
-  const telefone = "5541992297612";
-  const pix = "41992297612";
+  <main class="wrap">
+    <!-- MENU (SEM ADMIN VISÍVEL) -->
+    <nav class="tabs">
+      <button class="tab active" data-tab="home">Início</button>
+      <button class="tab" data-tab="indicacao">Indicação</button>
+      <button class="tab" data-tab="pontos">Meus pontos</button>
+      <button class="tab" data-tab="beneficios">Benefícios</button>
+    </nav>
 
-  function formatBRL(v){
-    return v.toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
-  }
+    <!-- HOME -->
+    <section class="panel show" id="tab-home">
+      <h1>Agende com facilidade</h1>
+      <p class="muted">
+        Veja primeiro os horários disponíveis e escolha com tranquilidade.
+      </p>
 
-  function montarMensagem(){
-    const nome = document.getElementById("nome").value.trim();
-    const servicoRaw = document.getElementById("servico").value;
-    const data = document.getElementById("data").value;
-    const hora = document.getElementById("hora").value;
+      <a class="btn primary" id="btnAgenda" href="#" target="_blank" rel="noopener">
+        VER HORÁRIOS DISPONÍVEIS
+      </a>
 
-    if (!nome || !servicoRaw || !data || !hora) {
-      alert("Preencha nome, serviço, data e horário.");
-      return null;
+      <button class="btn ghost" id="btnGoIndicacao">
+        Indique e ganhe benefícios
+      </button>
+
+      <div class="card">
+        <div class="cardTitle">Regra de resgate</div>
+        <div class="muted">
+          Resgates válidos de segunda a quarta, de acordo com disponibilidade da agenda.
+        </div>
+      </div>
+    </section>
+
+    <!-- INDICAÇÃO -->
+    <section class="panel" id="tab-indicacao">
+      <h1>Indique e ganhe</h1>
+      <p class="muted">
+        Cada amiga indicada e atendida gera <strong>+5 pontos</strong>.
+      </p>
+
+      <div class="card">
+        <div class="rowBetween">
+          <div>
+            <div class="cardTitle">Seu código</div>
+            <div class="code" id="meuCodigo">VIP-0000</div>
+          </div>
+          <button class="btn small" id="btnCopiarCodigo" type="button">Copiar</button>
+        </div>
+        <div class="muted smallText">
+          A indicação conta após a amiga realizar o procedimento.
+        </div>
+      </div>
+
+      <button class="btn primary" id="btnIndicar" type="button">
+        INDICAR UMA AMIGA (WhatsApp)
+      </button>
+
+      <button class="btn ghost" id="btnAbrirAgenda2" type="button">
+        Ver horários disponíveis
+      </button>
+
+      <div class="card">
+        <div class="cardTitle">Como funciona</div>
+        <ol class="steps">
+          <li>Você indica uma amiga</li>
+          <li>Ela agenda e realiza o procedimento</li>
+          <li>Você recebe +5 pontos (validação)</li>
+          <li>Troque por benefícios</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- PONTOS -->
+    <section class="panel" id="tab-pontos">
+      <h1>Meus pontos</h1>
+
+      <div class="grid2">
+        <div class="card">
+          <div class="cardTitle">Pontos</div>
+          <div class="big" id="pontos">0</div>
+          <div class="muted smallText">+5 por indicação válida</div>
+        </div>
+        <div class="card">
+          <div class="cardTitle">Indicações válidas</div>
+          <div class="big" id="indicacoes">0</div>
+          <div class="muted smallText">Confirmadas pelo Espaço Vip</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="cardTitle">Recompensas</div>
+
+        <div class="reward">
+          <div>
+            <div class="rewardName">3 amigas → Design de sobrancelhas GRATUITO</div>
+            <div class="muted smallText">Resgate seg–qua</div>
+          </div>
+          <button class="btn small" id="btnResgatar3" disabled>Resgatar</button>
+        </div>
+
+        <div class="reward">
+          <div>
+            <div class="rewardName">5 amigas → R$ 15 de desconto</div>
+            <div class="muted smallText">Resgate seg–qua</div>
+          </div>
+          <button class="btn small" id="btnResgatar5" disabled>Resgatar</button>
+        </div>
+
+        <div class="reward">
+          <div>
+            <div class="rewardName">8 amigas → Manicure simples</div>
+            <div class="muted smallText">Resgate seg–qua</div>
+          </div>
+          <button class="btn small" id="btnResgatar8" disabled>Resgatar</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="cardTitle">Próxima meta</div>
+        <div class="muted" id="proximaMeta">—</div>
+      </div>
+    </section>
+
+    <!-- BENEFÍCIOS -->
+    <section class="panel" id="tab-beneficios">
+      <h1>Benefícios do app</h1>
+      <div class="card">
+        <ul class="bullets">
+          <li><strong>+5 pontos</strong> por amiga indicada e atendida</li>
+          <li><strong>3 amigas</strong> → Design de sobrancelhas gratuito</li>
+          <li><strong>5 amigas</strong> → R$ 15 de desconto</li>
+          <li><strong>8 amigas</strong> → Manicure simples</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="cardTitle">Regra</div>
+        <div class="muted">Resgates de segunda a quarta, conforme disponibilidade.</div>
+      </div>
+      <button class="btn primary" id="btnAgenda3">Ver horários disponíveis</button>
+    </section>
+
+    <!-- ADMIN (ESCONDIDO) -->
+    <section class="panel" id="tab-admin">
+      <h1>Admin</h1>
+      <p class="muted">Validação manual de indicações.</p>
+
+      <div class="card">
+        <label class="lbl">PIN</label>
+        <input class="inp" id="pin" type="password" placeholder="Digite o PIN" />
+
+        <label class="lbl">Quantidade de indicações</label>
+        <input class="inp" id="qtd" type="number" min="1" value="1" />
+
+        <button class="btn primary" id="btnValidar">Validar (+5 cada)</button>
+      </div>
+
+      <div class="card">
+        <button class="btn danger small" id="btnReset">Resetar dados deste aparelho</button>
+      </div>
+    </section>
+
+    <footer class="foot">
+      <div class="muted smallText">Espaço Vip • Fidelidade exclusiva no app</div>
+    </footer>
+  </main>
+
+  <script src="app.js"></script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("./service-worker.js");
     }
-
-    const [servico, precoStr] = servicoRaw.split("|");
-    const preco = Number(precoStr || 0);
-
-    let blocoValor = "";
-    if (preco > 0) {
-      const sinal = Math.round(preco * 0.30 * 100) / 100;
-      blocoValor =
-        💰 Valor do serviço: ${formatBRL(preco)}\n +
-        ✅ Sinal (30%): ${formatBRL(sinal)}\n\n;
-    } else {
-      blocoValor = 💰 Valor: a combinar (avaliação)\n\n;
-    }
-
-    return (
-      Olá! Meu nome é ${nome}.\n +
-      Gostaria de agendar *${servico}*.\n +
-      📅 Data: ${data}\n +
-      🕒 Horário: ${hora}\n\n +
-      blocoValor +
-      ⏰ Cancelamentos devem ser avisados com no mínimo 2 horas. Caso não avise ou não compareça, o sinal é perdido.\n\n +
-      💳 PIX: ${pix}
-    );
-  }
-
-  // Botão do Whats
-  document.getElementById("btnWhats").addEventListener("click", () => {
-    const mensagem = montarMensagem();
-    if (!mensagem) return;
-
-    const link = https://wa.me/${telefone}?text=${encodeURIComponent(mensagem)};
-
-    // mais confiável que href em alguns Android:
-    window.location.assign(link);
-  });
-
-  // Copiar PIX
-  document.getElementById("btnCopiarPix").addEventListener("click", async () => {
-    try {
-      await navigator.clipboard.writeText(pix);
-      const status = document.getElementById("pixStatus");
-      status.style.display = "block";
-      setTimeout(() => (status.style.display = "none"), 1500);
-    } catch {
-      alert("Copie manualmente: " + pix);
-    }
-  });
-</script>
-
+  </script>
 </body>
 </html>
