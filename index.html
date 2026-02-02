@@ -154,6 +154,24 @@
       <div class="btn-row">
        <button class="btn" onclick="window.open('https://wa.me/5541992297612','_blank')">
   Agendar horário
+         <form id="agendamento-form" style="margin-top:20px; display:flex; flex-direction:column; gap:10px;">
+  
+  <input type="text" id="nome" placeholder="Seu nome" required>
+
+  <select id="servico" required>
+    <option value="">Selecione o serviço</option>
+    <option value="Podologia">Podologia</option>
+    <option value="Manicure">Manicure</option>
+    <option value="Pedicure">Pedicure</option>
+    <option value="Estética">Estética</option>
+  </select>
+
+  <input type="date" id="data" required>
+
+  <input type="time" id="hora" required>
+
+  <button type="submit">Confirmar agendamento</button>
+</form>
 </button>
       </div>
     </section>
@@ -161,4 +179,20 @@
     <script src="service-worker.js"></script>
   </main>
 </body>
+<script>
+document.getElementById("agendamento-form").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const nome = document.getElementById("nome").value;
+  const servico = document.getElementById("servico").value;
+  const data = document.getElementById("data").value;
+  const hora = document.getElementById("hora").value;
+
+  const telefone = "5541992643933"; // TROQUE PELO SEU WHATSAPP COM DDI
+  const mensagem = Olá! Meu nome é ${nome}. Gostaria de agendar ${servico} para o dia ${data} às ${hora}.;
+
+  const url = https://wa.me/${telefone}?text=${encodeURIComponent(mensagem)};
+  window.open(url, "_blank");
+});
+</script>
 </html>
