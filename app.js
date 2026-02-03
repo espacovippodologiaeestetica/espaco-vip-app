@@ -2,59 +2,61 @@ document.addEventListener("DOMContentLoaded", () => {
   const AGENDA_URL =
     "https://www.simplesagenda.com.br/agendamento_m.php?id=102e333dd822c1d9e0592ecf075e4bf4";
 
-  const WHATS_NUMERO = "5541992297612"; // seu número atual (com 55)
+  const WHATS_NUMERO = "5541992297612"; // número correto com 55
 
   function abrirAgenda() {
-    window.open(AGENDA_URL, "_blank", "noopener,noreferrer");
+    window.open(AGENDA_URL, "_blank");
   }
 
   function abrirWhats(mensagem) {
     const url =
-      "https://wa.me/" + WHATS_NUMERO + "?text=" + encodeURIComponent(mensagem);
-    window.open(url, "_blank", "noopener,noreferrer");
+      "https://wa.me/" +
+      WHATS_NUMERO +
+      "?text=" +
+      encodeURIComponent(mensagem);
+    window.open(url, "_blank");
   }
 
-  function bindClick(id, handler) {
+  function bind(id, fn) {
     const el = document.getElementById(id);
     if (!el) return;
-
-    // se for <a>, impede o href="#" de atrapalhar
     el.addEventListener("click", (e) => {
       e.preventDefault();
-      handler();
+      fn();
     });
   }
 
-  // ===== INÍCIO =====
-  bindClick("btnAgenda", abrirAgenda);
-  bindClick("btnGoIndicacao", () => {
-    // só troca para a aba indicação (se você usa tabs)
-    const tabBtn = document.querySelector('[data-tab="indicacao"]');
-    if (tabBtn) tabBtn.click();
+  // BOTÕES PRINCIPAIS
+  bind("btnAgenda", abrirAgenda);
+  bind("btnAbrirAgenda2", abrirAgenda);
+
+  bind("btnGoIndicacao", () => {
+    document
+      .querySelector('[data-tab="indicacao"]')
+      ?.click();
   });
 
-  // ===== INDICAÇÃO =====
-  bindClick("btnAbrirAgenda2", abrirAgenda);
-
-  bindClick("btnIndicar", () => {
-    const codigo = document.getElementById("meuCodigo")?.innerText?.trim() || "VIP";
+  bind("btnIndicar", () => {
+    const codigo =
+      document.getElementById("meuCodigo")?.innerText || "VIP";
     const msg =
-      "Olá 💗 Vim pelo APP Espaço Vip.\n\n" +
+      "Olá 💖 Vim pelo APP Espaço Vip.\n\n" +
       "Quero indicar uma amiga e participar da fidelidade.\n" +
-      "Meu código: " + codigo + "\n\n" +
-      "Pode me orientar?";
+      "Meu código: " +
+      codigo +
+      "\n\nPode me orientar?";
     abrirWhats(msg);
   });
 
-  bindClick("btnCopiarCodigo", async () => {
-    const codigo = document.getElementById("meuCodigo")?.innerText?.trim() || "";
+  bind("btnCopiarCodigo", async () => {
+    const codigo =
+      document.getElementById("meuCodigo")?.innerText;
     if (!codigo) return;
 
     try {
       await navigator.clipboard.writeText(codigo);
       alert("Código copiado: " + codigo);
     } catch {
-      // fallback
       const input = document.createElement("textarea");
       input.value = codigo;
       document.body.appendChild(input);
@@ -65,15 +67,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // ===== PONTOS (se existirem) =====
-  bindClick("btnValidar", () => {
-    alert("Validação manual: depois conectamos com seu controle real.");
-  });
-
-  bindClick("btnReset", () => {
-    if (confirm("Quer resetar os dados deste aparelho?")) {
-      localStorage.clear();
-      location.reload();
-    }
+  bind("btnFalarWhats", () => {
+    abrirWhats(
+      "Olá 💕 Vim pelo APP Espaço Vip e quero ativar uma promoção."
+    );
   });
 });
