@@ -67,23 +67,24 @@ document.addEventListener("DOMContentLoaded", () => {
   );
 
   // ===== INDICAÇÃO =====
-  bind("btnIndicar", () => {
-    const codigo = document.getElementById("meuCodigo")?.innerText || "VIP-0000";
+  bind("btnIndicar", async () => {
+  const codigo = document.getElementById("meuCodigo")?.innerText || "VIP-0000";
 
-    abrirWhats(
-      "Olá! Vim pelo APP Espaço Vip 💕\n\nQuero indicar uma amiga.\nMeu código: " +
-        codigo
-    );
-  });
+  const texto =
+    "Oi! 💕 Conheci o Espaço Vip e lembrei de você!\n\n" +
+    "Baixe o app e aproveite as promoções e benefícios:\n" +
+    window.location.origin + window.location.pathname + "\n\n" +
+    "Use meu código: " + codigo + "\n" +
+    "Qualquer dúvida me chama!";
 
-  bind("btnCopiarCodigo", () => {
-    const codigo = document.getElementById("meuCodigo").innerText;
-    navigator.clipboard.writeText(codigo);
-    alert("Código copiado!");
-  });
+  // Se o celular suportar compartilhamento
+  if (navigator.share) {
+    try {
+      await navigator.share({ text: texto });
+      return;
+    } catch (e) {}
+  }
 
-  // ===== PONTOS =====
-  bind("btnValidar", () => {
-    alert("Validação manual por enquanto 💗");
-  });
+  // Fallback: abre WhatsApp pra cliente encaminhar manualmente (ela escolhe contato)
+  abrirUrl("https://wa.me/?text=" + encodeURIComponent(texto));
 });
