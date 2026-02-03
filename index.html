@@ -3,558 +3,210 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Espaço Vip • Fidelidade & Promoções</title>
+  <title>Espaço Vip</title>
 
-  <style>
-    :root{
-      --bg: #f7f3f6;
-      --card: rgba(255,255,255,.78);
-      --text: #1b1b1b;
-      --muted: #6f6b71;
-      --pink1:#f3dbe6;
-      --pink2:#e9c2d5;
-      --gold:#caa24a;
-      --gold2:#b8913f;
-      --stroke: rgba(27,27,27,.10);
-      --shadow: 0 18px 45px rgba(0,0,0,.12);
-      --radius: 18px;
-    }
-
-    *{ box-sizing:border-box; }
-    body{
-      margin:0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background: radial-gradient(1200px 700px at 20% 0%, rgba(243,219,230,.75), transparent 55%),
-                  radial-gradient(1000px 650px at 100% 10%, rgba(233,194,213,.65), transparent 55%),
-                  var(--bg);
-      color: var(--text);
-    }
-
-    .wrap{
-      max-width: 980px;
-      margin: 0 auto;
-      padding: 22px 16px 40px;
-    }
-
-    header{
-      display:flex;
-      gap:16px;
-      align-items:center;
-      justify-content:space-between;
-      margin-bottom: 14px;
-    }
-
-    .brand{
-      display:flex;
-      gap:12px;
-      align-items:center;
-    }
-    .logo{
-      width:44px; height:44px;
-      border-radius: 50%;
-      display:grid; place-items:center;
-      background: linear-gradient(135deg, var(--pink1), var(--pink2));
-      border:1px solid var(--stroke);
-      font-weight:800;
-      color:#2b2b2b;
-    }
-    .brand h1{
-      font-size: 22px;
-      margin:0;
-      line-height: 1.1;
-    }
-    .brand p{
-      margin:2px 0 0;
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    /* Tabs */
-    .tabs{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin: 12px 0 18px;
-    }
-    .tab{
-      border: 1px solid var(--stroke);
-      background: rgba(255,255,255,.60);
-      backdrop-filter: blur(10px);
-      color: #2b2b2b;
-      padding: 10px 14px;
-      border-radius: 999px;
-      cursor:pointer;
-      font-weight: 650;
-      transition: .15s ease;
-    }
-    .tab:hover{ transform: translateY(-1px); }
-    .tab.active{
-      background: linear-gradient(135deg, var(--pink1), rgba(255,255,255,.65));
-      border-color: rgba(0,0,0,.12);
-    }
-
-    .panel{ display:none; }
-    .panel.show{ display:block; }
-
-    /* Layout */
-    .grid{
-      display:grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap: 16px;
-    }
-    @media (max-width: 860px){
-      .grid{ grid-template-columns: 1fr; }
-    }
-
-    .card{
-      background: var(--card);
-      border: 1px solid var(--stroke);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 16px;
-      backdrop-filter: blur(10px);
-    }
-    .cardTitle{
-      font-weight: 800;
-      margin: 0 0 8px;
-    }
-    .muted{ color: var(--muted); }
-    .smallText{ font-size: 13px; }
-    .bigTitle{
-      font-size: 36px;
-      margin: 6px 0 6px;
-      letter-spacing: -.5px;
-    }
-    @media (max-width: 560px){
-      .bigTitle{ font-size: 30px; }
-    }
-
-    /* Buttons */
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      padding: 12px 14px;
-      border-radius: 14px;
-      text-decoration:none;
-      border: 1px solid var(--stroke);
-      font-weight: 800;
-      cursor:pointer;
-      transition:.15s ease;
-      user-select:none;
-    }
-    .btn:hover{ transform: translateY(-1px); }
-    .btn.primary{
-      background: linear-gradient(90deg, var(--gold), var(--gold2));
-      color:#1a1a1a;
-      border-color: rgba(0,0,0,.10);
-    }
-    .btn.ghost{
-      background: rgba(255,255,255,.55);
-      color:#1b1b1b;
-    }
-    .btn.small{ padding: 10px 12px; border-radius: 12px; font-weight: 750; }
-    .stack{ display:flex; flex-wrap:wrap; gap:10px; margin-top: 10px; }
-
-    /* Lists */
-    .dealList{ margin: 10px 0 0; padding-left: 18px; }
-    .dealList li{ margin: 8px 0; }
-    .dealBox{
-      display:grid;
-      gap:10px;
-      padding: 14px;
-      border-radius: 16px;
-      border: 1px solid var(--stroke);
-      background: rgba(255,255,255,.55);
-    }
-    .dealHead{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:12px;
-    }
-    .dayPill{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      border: 1px solid var(--stroke);
-      background: rgba(255,255,255,.55);
-      font-weight: 850;
-      font-size: 12px;
-    }
-    .price{
-      font-weight: 900;
-    }
-
-    .divider{ height:1px; background: rgba(0,0,0,.08); margin: 14px 0; }
-
-    footer{
-      margin-top: 14px;
-      text-align:center;
-      color: var(--muted);
-      font-size: 13px;
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#f7e9ef" />
 </head>
 
 <body>
-  <div class="wrap">
+  <main class="app">
 
-    <header>
+    <header class="top">
+      <div class="badge">EV</div>
       <div class="brand">
-        <div class="logo">EV</div>
-        <div>
-          <h1>Espaço Vip</h1>
-          <p>Fidelidade • Promoções do Dia • Campanha do Mês</p>
-        </div>
+        <h1>Espaço Vip</h1>
+        <p>Fidelidade • Promoções do Dia • Campanha do Mês</p>
       </div>
     </header>
 
     <!-- MENU -->
-    <nav class="tabs" aria-label="Navegação">
-      <button class="tab active" type="button" data-tab="home">Início</button>
-      <button class="tab" type="button" data-tab="promos">Promoções</button>
-      <button class="tab" type="button" data-tab="indicacao">Indicação</button>
-      <button class="tab" type="button" data-tab="pontos">Meus pontos</button>
-      <button class="tab" type="button" data-tab="beneficios">Benefícios</button>
+    <nav class="tabs">
+      <button class="tab active" data-tab="home">Início</button>
+      <button class="tab" data-tab="promos">Promoções</button>
+      <button class="tab" data-tab="indicacao">Indicação</button>
+      <button class="tab" data-tab="pontos">Meus pontos</button>
+      <button class="tab" data-tab="beneficios">Benefícios</button>
     </nav>
 
     <!-- HOME -->
     <section class="panel show" id="tab-home">
-      <div class="grid">
-        <div class="card">
-          <div class="bigTitle">Agende com facilidade</div>
-          <p class="muted">Veja primeiro os horários disponíveis e escolha com tranquilidade.</p>
+      <div class="card">
+        <div class="heroTitle">Agende com facilidade</div>
+        <p class="muted">Veja primeiro os horários disponíveis e escolha com tranquilidade.</p>
 
-          <div class="stack">
-            <!-- AGENDA (link direto, SEM JS) -->
-            <a class="btn primary"
-               href="https://www.simplesagenda.com.br/agendamento_m.php?id=102e333dd822c1d9e0592ecf075e4bf4"
-               target="_blank" rel="noopener">
-              VER HORÁRIOS DISPONÍVEIS
-            </a>
+        <!-- Botão da agenda (precisa existir com esse id) -->
+        <a class="btn primary" id="btnAgenda" href="#" target="_blank" rel="noopener">VER HORÁRIOS DISPONÍVEIS</a>
 
-            <!-- PROMOS (abre aba interna) -->
-            <a class="btn ghost" href="#promos" id="goPromos">Ver promoções do dia</a>
-          </div>
+        <div style="height:10px"></div>
 
-          <div class="divider"></div>
+        <!-- Vai para Promoções dentro do app -->
+        <button class="btn ghost" id="btnGoPromos" type="button">Ver promoções do dia</button>
 
-          <p class="muted smallText"><strong>Ative uma oferta</strong> e fale conosco pelo WhatsApp com a mensagem pronta.</p>
+        <div class="hr"></div>
 
-          <a class="btn ghost"
-             href="https://wa.me/5541992297612?text=Ol%C3%A1%21%20Vim%20pelo%20App%20Espa%C3%A7o%20Vip%20e%20quero%20ativar%20uma%20promo%C3%A7%C3%A3o."
-             target="_blank" rel="noopener">
-            Falar comigo no WhatsApp
-          </a>
-        </div>
+        <div class="cardTitle">Regras</div>
+        <ul class="steps">
+          <li>Resgates/prêmios: de segunda a quarta, conforme disponibilidade da agenda.</li>
+          <li>Promoções: não acumulativas.</li>
+          <li>Pacotes: pagamento do valor total na 1ª sessão.</li>
+          <li>Pacotes: realizados 1x por semana.</li>
+        </ul>
 
-        <div class="card">
-          <div class="cardTitle">Regras</div>
-          <ul class="dealList smallText muted">
-            <li><strong>Resgates/brindes:</strong> de segunda a quarta, conforme disponibilidade da agenda.</li>
-            <li><strong>Promoções:</strong> não acumulativas.</li>
-            <li><strong>Pacotes:</strong> pagamento do valor total na 1ª sessão.</li>
-            <li><strong>Pacotes:</strong> realizados 1x por semana.</li>
-          </ul>
-        </div>
+        <div style="height:12px"></div>
+
+        <!-- WhatsApp (precisa existir com esse id) -->
+        <button class="btn primary" id="btnWhats" type="button">Falar comigo no WhatsApp</button>
       </div>
     </section>
 
     <!-- PROMOÇÕES -->
     <section class="panel" id="tab-promos">
-      <div class="grid">
-        <div class="card">
-          <div class="cardTitle">Promoções do dia</div>
-          <p class="muted smallText">Escolha a oferta e toque em <strong>ATIVAR NO WHATS</strong>.</p>
+      <div class="card">
+        <h2 class="sectionTitle">Promoções da semana</h2>
+        <p class="muted">Ative a oferta do dia e a mensagem já vai pronta no WhatsApp.</p>
 
-          <!-- SEGUNDA -->
-          <div class="dealBox" style="margin-top:12px;">
-            <div class="dealHead">
-              <div class="dayPill">Segunda</div>
-            </div>
-            <ul class="dealList">
-              <li>Manicure <span class="price">R$25</span>
-                • <a class="btn small primary" target="_blank" rel="noopener"
-                     href="https://wa.me/5541992297612?text=Quero%20ativar%20a%20promo%C3%A7%C3%A3o%20de%20SEGUNDA%3A%20Manicure%20R%2425.%20Vim%20pelo%20App%20Espa%C3%A7o%20Vip.">ATIVAR NO WHATS</a>
-              </li>
-              <li>Manicure esmaltação em gel <span class="price">R$50</span>
-                • <a class="btn small primary" target="_blank" rel="noopener"
-                     href="https://wa.me/5541992297612?text=Quero%20ativar%20a%20promo%C3%A7%C3%A3o%20de%20SEGUNDA%3A%20Manicure%20esmalta%C3%A7%C3%A3o%20em%20gel%20R%2450.%20Vim%20pelo%20App%20Espa%C3%A7o%20Vip.">ATIVAR NO WHATS</a>
-              </li>
-              <li>Pedicure esmaltação em gel <span class="price">R$60</span>
-                • <a class="btn small primary" target="_blank" rel="noopener"
-                     href="https://wa.me/5541992297612?text=Quero%20ativar%20a%20promo%C3%A7%C3%A3o%20de%20SEGUNDA%3A%20Pedicure%20esmalta%C3%A7%C3%A3o%20em%20gel%20R%2460.%20Vim%20pelo%20App%20Espa%C3%A7o%20Vip.">ATIVAR NO WHATS</a>
-              </li>
-              <li>SPA dos pés com pedicure <span class="price">R$99,90</span>
-                • <a class="btn small primary" target="_blank" rel="noopener"
-                     href="https://wa.me/5541992297612?text=Quero%20ativar%20a%20promo%C3%A7%C3%A3o%20de%20SEGUNDA%3A%20SPA%20dos%20p%C3%A9s%20com%20pedicure%20R%2499%2C90.%20Vim%20pelo%20App%20Espa%C3%A7o%20Vip.">ATIVAR NO WHATS</a>
-              </li>
-            </ul>
-          </div>
+        <div class="cardTitle">Segunda</div>
+        <ul class="steps">
+          <li>Manicure R$25</li>
+          <li>Manicure esmaltação em gel R$50</li>
+          <li>Pedicure esmaltação em gel R$60</li>
+          <li>SPA dos pés com pedicure R$99,90</li>
+        </ul>
+        <button class="btn primary" id="promoSegunda" type="button">Ativar oferta de Segunda</button>
 
-          <!-- TERÇA -->
-          <div class="dealBox">
-            <div class="dealHead">
-              <div class="dayPill">Terça</div>
-            </div>
-            <ul class="dealList">
-              <li>Design de sobrancelhas <span class="price">R$25</span>
-                • <a class="btn small primary" target="_blank" rel="noopener"
-                     href="https://wa.me/5541992297612?text=Quero%20ativar%20a%20promo%C3%A7%C3%A3o%20de%20TER%C3%87A%3A%20Design%20de%20sobrancelhas%20R%2425.%20Vim%20pelo%20App%20Espa%C3%A7o%20Vip.">ATIVAR NO WHATS</a>
-              </li>
-              <li>Designer e Henna <span class="price">R$40</span>
-                • <a class="btn small primary" target="_blank" rel="noopener"
-                     href="https://wa.me/5541992297612?text=Quero%20ativar%20a%20promo%C3%A7%C3%A3o%20de%20TER%C3%87A%3A%20Designer%20e%20Henna%20R%2440.%20Vim%20pelo%20App%20Espa%C3%A7o%20Vip.">ATIVAR NO WHATS</a>
-              </li>
-              <li>Brow lamination <span class="price">R$80</span>
-                • <a class="btn small primary" target="_blank" rel="noopener"
-                     href="https://wa.me/5541992297612?text=Quero%20ativar%20a%20promo%C3%A7%C3%A3o%20de%20TER%C3%87A%3A%20Brow%20lamination%20R%2480.%20Vim%20pelo%20App%20Espa%C3%A7o%20Vip.">ATIVAR NO WHATS</a>
-              </li>
-            </ul>
-          </div>
+        <div class="hr"></div>
 
-          <!-- QUARTA -->
-          <div class="dealBox">
-            <div class="dealHead">
-              <div class="dayPill">Quarta</div>
-            </div>
-            <ul class="dealList">
-              <li>Limpeza de pele intensa <span class="price">R$100</span>
-                • <a class="btn small primary" target="_blank" rel="noopener"
-                     href="https://wa.me/5541992297612?text=Quero%20ativar%20a%20promo%C3%A7%C3%A3o%20de%20QUARTA%3A%20Limpeza%20de%20pele%20intensa%20R%24100.%20Vim%20pelo%20App%20Espa%C3%A7o%20Vip.">ATIVAR NO WHATS</a>
-              </li>
-              <li>Limpeza de pele ultrassônica <span class="price">R$140</span>
-                • <a class="btn small primary" target="_blank" rel="noopener"
-                     href="https://wa.me/5541992297612?text=Quero%20ativar%20a%20promo%C3%A7%C3%A3o%20de%20QUARTA%3A%20Limpeza%20de%20pele%20ultrass%C3%B4nica%20R%24140.%20Vim%20pelo%20App%20Espa%C3%A7o%20Vip.">ATIVAR NO WHATS</a>
-              </li>
-              <li>Limpeza de pele peeling de diamante <span class="price">R$80</span>
-                • <a class="btn small primary" target="_blank" rel="noopener"
-                     href="https://wa.me/5541992297612?text=Quero%20ativar%20a%20promo%C3%A7%C3%A3o%20de%20QUARTA%3A%20Peeling%20de%20diamante%20R%2480.%20Vim%20pelo%20App%20Espa%C3%A7o%20Vip.">ATIVAR NO WHATS</a>
-              </li>
-            </ul>
-          </div>
+        <div class="cardTitle">Terça</div>
+        <ul class="steps">
+          <li>Design de Sobrancelhas R$25</li>
+          <li>Designer e Henna R$40</li>
+          <li>Brow lamination R$80</li>
+        </ul>
+        <button class="btn primary" id="promoTerca" type="button">Ativar oferta de Terça</button>
 
-          <!-- QUINTA -->
-          <div class="dealBox">
-            <div class="dealHead">
-              <div class="dayPill">Quinta</div>
-            </div>
-            <ul class="dealList">
-              <li>Depilação íntima completa <span class="price">R$50</span>
-                • <a class="btn small primary" target="_blank" rel="noopener"
-                     href="https://wa.me/5541992297612?text=Quero%20ativar%20a%20promo%C3%A7%C3%A3o%20de%20QUINTA%3A%20Depila%C3%A7%C3%A3o%20%C3%ADntima%20completa%20R%2450.%20Vim%20pelo%20App%20Espa%C3%A7o%20Vip.">ATIVAR NO WHATS</a>
-              </li>
-              <li>Depilação completa (perna/coxa, íntima, axilas) <span class="price">R$110</span>
-                • <a class="btn small primary" target="_blank" rel="noopener"
-                     href="https://wa.me/5541992297612?text=Quero%20ativar%20a%20promo%C3%A7%C3%A3o%20de%20QUINTA%3A%20Depila%C3%A7%C3%A3o%20completa%20%28perna%2Fcoxa%2C%20%C3%ADntima%2C%20axilas%29%20R%24110.%20Vim%20pelo%20App%20Espa%C3%A7o%20Vip.">ATIVAR NO WHATS</a>
-              </li>
-            </ul>
-          </div>
+        <div class="hr"></div>
 
-          <!-- SEXTA -->
-          <div class="dealBox">
-            <div class="dealHead">
-              <div class="dayPill">Sexta</div>
-            </div>
-            <ul class="dealList">
-              <li>Bronzeamento <span class="price">R$90</span> (sem biquíni de fita) — cliente trazer biquíni
-                • <a class="btn small primary" target="_blank" rel="noopener"
-                     href="https://wa.me/5541992297612?text=Quero%20ativar%20a%20promo%C3%A7%C3%A3o%20de%20SEXTA%3A%20Bronzeamento%20R%2490%20%28sem%20biqu%C3%ADni%20de%20fita%29.%20Vou%20levar%20biqu%C3%ADni.%20Vim%20pelo%20App%20Espa%C3%A7o%20Vip.">ATIVAR NO WHATS</a>
-              </li>
-              <li>3 sessões <span class="price">R$250</span>
-                • <a class="btn small primary" target="_blank" rel="noopener"
-                     href="https://wa.me/5541992297612?text=Quero%20ativar%20a%20promo%C3%A7%C3%A3o%20de%20SEXTA%3A%203%20sess%C3%B5es%20de%20bronzeamento%20R%24250.%20Pagamento%20na%201%C2%AA%20sess%C3%A3o.%20Vim%20pelo%20App%20Espa%C3%A7o%20Vip.">ATIVAR NO WHATS</a>
-              </li>
-              <li>Bronzeamento com fita <span class="price">R$120</span>
-                • <a class="btn small primary" target="_blank" rel="noopener"
-                     href="https://wa.me/5541992297612?text=Quero%20ativar%20a%20promo%C3%A7%C3%A3o%20de%20SEXTA%3A%20Bronzeamento%20com%20fita%20R%24120.%20Vim%20pelo%20App%20Espa%C3%A7o%20Vip.">ATIVAR NO WHATS</a>
-              </li>
-              <li>3 sessões com fita <span class="price">R$330</span>
-                • <a class="btn small primary" target="_blank" rel="noopener"
-                     href="https://wa.me/5541992297612?text=Quero%20ativar%20a%20promo%C3%A7%C3%A3o%20de%20SEXTA%3A%203%20sess%C3%B5es%20de%20bronzeamento%20com%20fita%20R%24330.%20Pagamento%20na%201%C2%AA%20sess%C3%A3o.%20Vim%20pelo%20App%20Espa%C3%A7o%20Vip.">ATIVAR NO WHATS</a>
-              </li>
-            </ul>
-          </div>
+        <div class="cardTitle">Quarta</div>
+        <ul class="steps">
+          <li>Limpeza de pele intensa R$100</li>
+          <li>Limpeza de pele ultrassônica R$140</li>
+          <li>Limpeza de pele peeling de diamante R$80</li>
+        </ul>
+        <button class="btn primary" id="promoQuarta" type="button">Ativar oferta de Quarta</button>
 
-          <div class="divider"></div>
+        <div class="hr"></div>
 
-          <div class="cardTitle">Campanha do mês • Fevereiro (Carnaval)</div>
-          <p class="muted smallText">Pacotes com pagamento do valor total na 1ª sessão.</p>
+        <div class="cardTitle">Quinta</div>
+        <ul class="steps">
+          <li>Depilação íntima completa R$50</li>
+          <li>Depilação completa (perna/coxa, íntima, axilas) R$110</li>
+        </ul>
+        <button class="btn primary" id="promoQuinta" type="button">Ativar oferta de Quinta</button>
 
-          <div class="dealBox">
-            <div class="dealHead">
-              <div class="dayPill">Carnaval</div>
-            </div>
-            <ul class="dealList">
-              <li>Bronzeamento 4 sessões <span class="price">R$400</span>
-                • <a class="btn small primary" target="_blank" rel="noopener"
-                     href="https://wa.me/5541992297612?text=Quero%20ativar%20a%20CAMPANHA%20DE%20FEVEREIRO%20%28Carnaval%29%3A%20Bronzeamento%204%20sess%C3%B5es%20R%24400.%20Pagamento%20na%201%C2%AA%20sess%C3%A3o.%20Vim%20pelo%20App%20Espa%C3%A7o%20Vip.">ATIVAR NO WHATS</a>
-              </li>
-              <li>Massagem modeladora 8 sessões <span class="price">R$480</span>
-                • <a class="btn small primary" target="_blank" rel="noopener"
-                     href="https://wa.me/5541992297612?text=Quero%20ativar%20a%20CAMPANHA%20DE%20FEVEREIRO%20%28Carnaval%29%3A%20Massagem%20modeladora%208%20sess%C3%B5es%20R%24480.%20Pagamento%20na%201%C2%AA%20sess%C3%A3o.%20Vim%20pelo%20App%20Espa%C3%A7o%20Vip.">ATIVAR NO WHATS</a>
-              </li>
-              <li>Drenagem linfática 4 sessões <span class="price">R$450</span>
-                • <a class="btn small primary" target="_blank" rel="noopener"
-                     href="https://wa.me/5541992297612?text=Quero%20ativar%20a%20CAMPANHA%20DE%20FEVEREIRO%20%28Carnaval%29%3A%20Drenagem%20linf%C3%A1tica%204%20sess%C3%B5es%20R%24450.%20Pagamento%20na%201%C2%AA%20sess%C3%A3o.%20Vim%20pelo%20App%20Espa%C3%A7o%20Vip.">ATIVAR NO WHATS</a>
-              </li>
-            </ul>
-          </div>
+        <div class="hr"></div>
 
-          <div class="divider"></div>
+        <div class="cardTitle">Sexta</div>
+        <ul class="steps">
+          <li>Bronzeamento R$90 (sem biquíni de fita) — cliente trazer biquíni</li>
+          <li>3 sessões R$250</li>
+          <li>Bronzeamento com fita R$120</li>
+          <li>3 sessões R$330</li>
+        </ul>
+        <button class="btn primary" id="promoSexta" type="button">Ativar oferta de Sexta</button>
+      </div>
 
-          <a class="btn ghost"
-             href="https://www.simplesagenda.com.br/agendamento_m.php?id=102e333dd822c1d9e0592ecf075e4bf4"
-             target="_blank" rel="noopener">
-            Ir para a Agenda
-          </a>
-        </div>
-
-        <div class="card">
-          <div class="cardTitle">Dica para atualizar no domingo</div>
-          <p class="muted smallText">
-            Você só altera este bloco “Promoções do dia” e “Campanha do mês”.
-            O resto do app fica igual.
-          </p>
-
-          <div class="divider"></div>
-
-          <div class="cardTitle">Observações</div>
-          <ul class="dealList smallText muted">
-            <li>Promoções válidas <strong>na semana</strong> (não acumulativas).</li>
-            <li>Pacotes pagos <strong>na 1ª sessão</strong> (valor total).</li>
-            <li>Pacotes realizados <strong>1x por semana</strong>.</li>
-          </ul>
-        </div>
+      <div class="card">
+        <h2 class="sectionTitle">Campanha do mês • Fevereiro (Carnaval)</h2>
+        <ul class="steps">
+          <li>Bronzeamento 4 sessões R$400</li>
+          <li>Massagem modeladora 8 sessões R$480</li>
+          <li>Drenagem linfática 4 sessões R$450</li>
+        </ul>
+        <p class="smallText"><strong>Observação:</strong> pacotes pagos na 1ª sessão (valor total). Não acumulativo.</p>
+        <button class="btn primary" id="promoCarnaval" type="button">Ativar campanha de Fevereiro</button>
       </div>
     </section>
 
     <!-- INDICAÇÃO -->
     <section class="panel" id="tab-indicacao">
       <div class="card">
-        <div class="cardTitle">Indicação</div>
-        <p class="muted">Indique amigas e ganhe pontos para trocar por benefícios.</p>
+        <h2 class="sectionTitle">Indique e ganhe</h2>
+        <p class="muted">Cada amiga indicada e atendida gera <strong>+5 pontos</strong>.</p>
 
-        <ul class="dealList">
-          <li>1 amiga atendida = <strong>+5 pontos</strong></li>
-          <li>3 amigas = <strong>Design de sobrancelhas GRATUITO</strong></li>
-          <li>5 amigas = <strong>R$ 15 de desconto</strong></li>
-          <li>8 amigas = <strong>Manicure simples</strong></li>
-        </ul>
-
-        <div class="stack">
-          <a class="btn primary"
-             href="https://wa.me/5541992297612?text=Quero%20indicar%20uma%20amiga%20pelo%20App%20Espa%C3%A7o%20Vip.%20Nome%20da%20amiga%3A%20_____%20%7C%20Telefone%3A%20_____."
-             target="_blank" rel="noopener">
-            INDICAR UMA AMIGA (WhatsApp)
-          </a>
-
-          <a class="btn ghost"
-             href="https://www.simplesagenda.com.br/agendamento_m.php?id=102e333dd822c1d9e0592ecf075e4bf4"
-             target="_blank" rel="noopener">
-            Ver horários disponíveis
-          </a>
+        <div class="rowBetween">
+          <div>
+            <div class="cardTitle">Seu código</div>
+            <div class="code" id="meuCodigo">VIP-0000</div>
+          </div>
+          <button class="btn small" id="btnCopiarCodigo" type="button">Copiar</button>
         </div>
 
-        <p class="muted smallText" style="margin-top:10px;">
-          A indicação conta após a amiga realizar o procedimento.
-        </p>
+        <div class="hr"></div>
+
+        <button class="btn primary" id="btnIndicar" type="button">INDICAR UMA AMIGA (WhatsApp)</button>
+        <div style="height:10px"></div>
+        <button class="btn ghost" id="btnAbrirAgenda2" type="button">Ver horários disponíveis</button>
+
+        <div class="hr"></div>
+
+        <div class="cardTitle">Recompensas</div>
+        <ul class="steps">
+          <li>3 amigas: Design de sobrancelhas <strong>GRATUITO</strong></li>
+          <li>5 amigas: <strong>R$15</strong> de desconto</li>
+          <li>8 amigas: Manicure simples</li>
+        </ul>
       </div>
     </section>
 
-    <!-- MEUS PONTOS -->
+    <!-- PONTOS -->
     <section class="panel" id="tab-pontos">
       <div class="card">
-        <div class="cardTitle">Meus pontos</div>
-        <p class="muted smallText">
-          Nesta versão, os pontos ficam como referência (controle final feito por você).
-          Se quiser, depois eu monto um painel simples para você marcar e salvar no aparelho.
-        </p>
+        <h2 class="sectionTitle">Meus pontos</h2>
+        <p class="muted">Aqui aparecem seus pontos neste aparelho.</p>
 
-        <div class="dealBox">
-          <div class="dealHead">
-            <div class="dayPill">Tabela</div>
+        <div class="rowBetween">
+          <div>
+            <div class="cardTitle">Pontos atuais</div>
+            <div class="code" id="meusPontos">0</div>
           </div>
-          <ul class="dealList">
-            <li><strong>15 pontos</strong> → R$ 15 de desconto</li>
-            <li><strong>+ (por indicação)</strong> → +5 por amiga atendida</li>
-          </ul>
+          <button class="btn small" id="btnValidar" type="button">Validar (+5 cada)</button>
         </div>
 
-        <div class="stack">
-          <a class="btn primary"
-             href="https://wa.me/5541992297612?text=Quero%20consultar%20meus%20pontos%20no%20App%20Espa%C3%A7o%20Vip.%20Meu%20nome%20%C3%A9%3A%20_____."
-             target="_blank" rel="noopener">
-            Consultar no WhatsApp
-          </a>
-        </div>
+        <div class="hr"></div>
+
+        <button class="btn danger small" id="btnReset" type="button">Resetar dados deste aparelho</button>
       </div>
     </section>
 
     <!-- BENEFÍCIOS -->
     <section class="panel" id="tab-beneficios">
       <div class="card">
-        <div class="cardTitle">Benefícios</div>
-        <p class="muted">Resgates válidos de segunda a quarta, conforme disponibilidade.</p>
-
-        <div class="dealBox">
-          <div class="dealHead">
-            <div class="dayPill">Resgates</div>
-          </div>
-          <ul class="dealList">
-            <li><strong>3 amigas</strong> → Design de sobrancelhas gratuito</li>
-            <li><strong>5 amigas</strong> → R$ 15 de desconto</li>
-            <li><strong>8 amigas</strong> → Manicure simples</li>
-          </ul>
-        </div>
-
-        <div class="stack">
-          <a class="btn primary"
-             href="https://wa.me/5541992297612?text=Quero%20resgatar%20um%20benef%C3%ADcio%20do%20App%20Espa%C3%A7o%20Vip.%20Meu%20nome%3A%20_____%20%7C%20Benef%C3%ADcio%3A%20_____."
-             target="_blank" rel="noopener">
-            Resgatar no WhatsApp
-          </a>
-
-          <a class="btn ghost"
-             href="https://www.simplesagenda.com.br/agendamento_m.php?id=102e333dd822c1d9e0592ecf075e4bf4"
-             target="_blank" rel="noopener">
-            Abrir Agenda
-          </a>
-        </div>
+        <h2 class="sectionTitle">Benefícios</h2>
+        <ul class="steps">
+          <li>Promoções exclusivas para quem usa o app</li>
+          <li>Indicação de amigas com pontos</li>
+          <li>Resgates de segunda a quarta (conforme disponibilidade)</li>
+        </ul>
+        <div class="hr"></div>
+        <button class="btn primary" id="btnWhats2" type="button">Falar comigo no WhatsApp</button>
       </div>
     </section>
 
-    <footer>
-      Espaço Vip • Fidelidade exclusiva no app
+    <footer class="foot">
+      <div class="smallText">Espaço Vip • Fidelidade exclusiva no app</div>
     </footer>
 
-  </div>
+  </main>
+
+  <!-- mantém seu JS separado -->
+  <script src="app.js"></script>
 
   <script>
-    // Troca de abas (somente navegação interna)
-    const tabs = document.querySelectorAll(".tab");
-    const panels = document.querySelectorAll(".panel");
-
-    function showTab(key){
-      tabs.forEach(t => t.classList.toggle("active", t.dataset.tab === key));
-      panels.forEach(p => p.classList.toggle("show", p.id === "tab-" + key));
-      // rolar para o topo em mobile
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-
-    tabs.forEach(t => t.addEventListener("click", () => showTab(t.dataset.tab)));
-
-    // Botão da home para ir pra aba promoções
-    const goPromos = document.getElementById("goPromos");
-    if(goPromos){
-      goPromos.addEventListener("click", (e) => {
-        e.preventDefault();
-        showTab("promos");
-      });
+    /* Service Worker (PWA) */
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("./service-worker.js");
     }
   </script>
 </body>
