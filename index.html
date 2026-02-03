@@ -1,194 +1,529 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Espaço Vip</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Espaço Vip • Fidelidade</title>
 
-  <link rel="manifest" href="manifest.json" />
-  <meta name="theme-color" content="#151517" />
-  <link rel="stylesheet" href="styles.css" />
+  <meta name="theme-color" content="#f6dbe6" />
+
+  <style>
+    :root{
+      --bg: #fbf3f7;          /* rosa bem claro */
+      --card: #ffffffcc;
+      --text: #1f1f1f;
+      --muted: #6b6b6b;
+
+      --pink: #f6dbe6;        /* rosa pastel */
+      --pink-2: #f1c6d8;
+      --gold: #d8b46a;        /* dourado */
+      --gold-2: #caa24e;
+
+      --shadow: 0 18px 45px rgba(0,0,0,.10);
+      --radius: 18px;
+      --radius2: 22px;
+    }
+
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: radial-gradient(1200px 800px at 20% -10%, var(--pink), transparent 60%),
+                  radial-gradient(900px 600px at 95% 10%, #fff, transparent 55%),
+                  linear-gradient(180deg, var(--bg), #fff);
+      color: var(--text);
+    }
+
+    .wrap{
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 18px 14px 28px;
+    }
+
+    /* Header */
+    header{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      padding: 10px 8px 6px;
+    }
+    .logo{
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(145deg, #fff, var(--pink));
+      border: 1px solid rgba(0,0,0,.06);
+      box-shadow: var(--shadow);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight: 900;
+      letter-spacing:.5px;
+    }
+    .titleBlock h1{
+      font-size: 26px;
+      margin:0;
+      line-height:1.1;
+      font-weight: 850;
+    }
+    .titleBlock .sub{
+      margin: 3px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* Tabs */
+    .tabs{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      padding: 12px 8px 6px;
+    }
+    .tab{
+      appearance:none;
+      border: 1px solid rgba(0,0,0,.06);
+      background: rgba(255,255,255,.75);
+      padding: 10px 14px;
+      border-radius: 999px;
+      cursor:pointer;
+      box-shadow: 0 10px 22px rgba(0,0,0,.06);
+      font-weight: 700;
+      color: #2b2b2b;
+      transition: transform .08s ease, background .15s ease;
+    }
+    .tab:hover{ transform: translateY(-1px); }
+    .tab.active{
+      background: linear-gradient(180deg, #ffffff, var(--pink));
+      border-color: rgba(0,0,0,.08);
+    }
+
+    /* Panels */
+    .panel{
+      display:none;
+      padding: 10px 8px 0;
+    }
+    .panel.show{ display:block; }
+
+    /* Cards / Buttons */
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+      margin-top: 10px;
+    }
+
+    .card{
+      background: var(--card);
+      border: 1px solid rgba(0,0,0,.06);
+      border-radius: var(--radius2);
+      box-shadow: var(--shadow);
+      padding: 16px;
+      backdrop-filter: blur(8px);
+    }
+
+    .cardTitle{
+      font-weight: 900;
+      margin-bottom: 8px;
+      font-size: 16px;
+    }
+
+    .muted{ color: var(--muted); }
+    .smallText{ font-size: 13px; color: var(--muted); }
+    .kicker{
+      margin: 0 0 10px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .btnRow{
+      display:flex;
+      flex-wrap:wrap;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .btn{
+      appearance:none;
+      border: none;
+      border-radius: 14px;
+      padding: 12px 14px;
+      cursor:pointer;
+      font-weight: 850;
+      letter-spacing:.2px;
+      box-shadow: 0 12px 28px rgba(0,0,0,.12);
+      transition: transform .08s ease, filter .15s ease;
+    }
+    .btn:hover{ transform: translateY(-1px); filter: brightness(1.02); }
+
+    .btn.primary{
+      background: linear-gradient(180deg, var(--gold), var(--gold-2));
+      color: #1e1a12;
+    }
+    .btn.ghost{
+      background: rgba(255,255,255,.78);
+      border: 1px solid rgba(0,0,0,.07);
+      color: #2b2b2b;
+      box-shadow: 0 10px 22px rgba(0,0,0,.08);
+    }
+    .btn.small{
+      padding: 10px 12px;
+      border-radius: 12px;
+      font-weight: 800;
+      box-shadow: 0 10px 18px rgba(0,0,0,.10);
+    }
+    .btn.danger{
+      background: linear-gradient(180deg, #ff6b6b, #ff4a4a);
+      color: #fff;
+    }
+
+    .heroTitle{
+      font-size: 30px;
+      margin: 4px 0 6px;
+      line-height:1.05;
+      font-weight: 950;
+    }
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.72);
+      border: 1px solid rgba(0,0,0,.06);
+      font-weight: 900;
+    }
+
+    .rowBetween{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 10px;
+      flex-wrap:wrap;
+    }
+    .code{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      font-weight: 900;
+      font-size: 15px;
+      padding: 8px 10px;
+      border-radius: 12px;
+      background: rgba(246,219,230,.65);
+      border: 1px dashed rgba(0,0,0,.12);
+    }
+
+    .steps{
+      margin: 10px 0 0;
+      padding-left: 18px;
+      color: #2d2d2d;
+    }
+    .steps li{ margin: 7px 0; }
+
+    footer{
+      margin-top: 18px;
+      padding: 8px 10px 0;
+    }
+
+    /* Mobile */
+    @media (min-width: 820px){
+      .grid{ grid-template-columns: 1.2fr .8fr; }
+    }
+  </style>
 </head>
 
 <body>
-  <header class="top">
-    <div class="brand">
-      <!-- ATALHO SECRETO NO TÍTULO -->
-      <div class="title" id="secretAdmin">Espaço Vip</div>
-      <div class="subtitle">Fidelidade & Benefícios Exclusivos</div>
-    </div>
-  </header>
-
   <main class="wrap">
-    <!-- MENU (SEM ADMIN VISÍVEL) -->
-    <nav class="tabs">
-      <button class="tab active" data-tab="home">Início</button>
-      <button class="tab" data-tab="indicacao">Indicação</button>
-      <button class="tab" data-tab="pontos">Meus pontos</button>
-      <button class="tab" data-tab="beneficios">Benefícios</button>
+    <!-- HEADER -->
+    <header>
+      <div class="logo">EV</div>
+      <div class="titleBlock">
+        <h1>Espaço Vip</h1>
+        <div class="sub">Fidelidade & Benefícios Exclusivos</div>
+      </div>
+    </header>
+
+    <!-- TABS -->
+    <nav class="tabs" aria-label="Menu">
+      <button class="tab active" data-tab="home" type="button">Início</button>
+      <button class="tab" data-tab="indicacao" type="button">Indicação</button>
+      <button class="tab" data-tab="pontos" type="button">Meus pontos</button>
+      <button class="tab" data-tab="beneficios" type="button">Benefícios</button>
     </nav>
 
     <!-- HOME -->
     <section class="panel show" id="tab-home">
-      <h1>Agende com facilidade</h1>
-      <p class="muted">
-        Veja primeiro os horários disponíveis e escolha com tranquilidade.
-      </p>
+      <div class="grid">
+        <div class="card">
+          <div class="heroTitle">Agende com facilidade</div>
+          <p class="kicker">Veja primeiro os horários disponíveis e escolha com tranquilidade.</p>
 
-      <a class="btn primary" id="btnAgenda" href="#" target="_blank" rel="noopener">
-        VER HORÁRIOS DISPONÍVEIS
-      </a>
+          <div class="btnRow">
+            <button class="btn primary" id="btnAgenda" type="button">
+              VER HORÁRIOS DISPONÍVEIS
+            </button>
 
-      <button class="btn ghost" id="btnGoIndicacao">
-        Indique e ganhe benefícios
-      </button>
+            <button class="btn ghost" id="btnGoIndicacao" type="button">
+              Indique e ganhe benefícios
+            </button>
+          </div>
+        </div>
 
-      <div class="card">
-        <div class="cardTitle">Regra de resgate</div>
-        <div class="muted">
-          Resgates válidos de segunda a quarta, de acordo com disponibilidade da agenda.
+        <div class="card">
+          <div class="cardTitle">Regra de resgate</div>
+          <div class="smallText">
+            Resgates válidos de <strong>segunda a quarta</strong>, de acordo com disponibilidade da agenda.
+            <br><br>
+            Espaço Vip • Fidelidade exclusiva no app
+          </div>
         </div>
       </div>
     </section>
 
     <!-- INDICAÇÃO -->
     <section class="panel" id="tab-indicacao">
-      <h1>Indique e ganhe</h1>
-      <p class="muted">
-        Cada amiga indicada e atendida gera <strong>+5 pontos</strong>.
-      </p>
-
       <div class="card">
-        <div class="rowBetween">
-          <div>
-            <div class="cardTitle">Seu código</div>
+        <div class="heroTitle">Indique e ganhe</div>
+        <p class="kicker">
+          Cada amiga indicada e atendida gera <strong>+5 pontos</strong>.
+        </p>
+
+        <div class="card" style="margin-top:12px;">
+          <div class="rowBetween">
+            <div>
+              <div class="cardTitle">Seu código</div>
+              <div class="smallText">Compartilhe com a amiga na hora do agendamento.</div>
+            </div>
+
             <div class="code" id="meuCodigo">VIP-0000</div>
+
+            <button class="btn small" id="btnCopiarCodigo" type="button">Copiar</button>
           </div>
-          <button class="btn small" id="btnCopiarCodigo" type="button">Copiar</button>
+
+          <div class="smallText" style="margin-top:10px;">
+            A indicação conta após a amiga realizar o procedimento.
+          </div>
         </div>
-        <div class="muted smallText">
-          A indicação conta após a amiga realizar o procedimento.
+
+        <div class="btnRow">
+          <button class="btn primary" id="btnIndicar" type="button">
+            INDICAR UMA AMIGA (WhatsApp)
+          </button>
+
+          <button class="btn ghost" id="btnAbrirAgenda2" type="button">
+            Ver horários disponíveis
+          </button>
         </div>
-      </div>
 
-      <button class="btn primary" id="btnIndicar" type="button">
-        INDICAR UMA AMIGA (WhatsApp)
-      </button>
-
-      <button class="btn ghost" id="btnAbrirAgenda2" type="button">
-        Ver horários disponíveis
-      </button>
-
-      <div class="card">
-        <div class="cardTitle">Como funciona</div>
-        <ol class="steps">
-          <li>Você indica uma amiga</li>
-          <li>Ela agenda e realiza o procedimento</li>
-          <li>Você recebe +5 pontos (validação)</li>
-          <li>Troque por benefícios</li>
-        </ol>
+        <div class="card" style="margin-top:12px;">
+          <div class="cardTitle">Como funciona</div>
+          <ol class="steps">
+            <li>Você clica em <strong>Indicar uma amiga</strong> e envia a mensagem pelo WhatsApp.</li>
+            <li>A amiga agenda e realiza o procedimento.</li>
+            <li>Você ganha <strong>+5 pontos</strong> quando confirmado.</li>
+            <li>Ao atingir metas, você resgata benefícios (seg–qua).</li>
+          </ol>
+        </div>
       </div>
     </section>
 
     <!-- PONTOS -->
     <section class="panel" id="tab-pontos">
-      <h1>Meus pontos</h1>
-
-      <div class="grid2">
-        <div class="card">
-          <div class="cardTitle">Pontos</div>
-          <div class="big" id="pontos">0</div>
-          <div class="muted smallText">+5 por indicação válida</div>
-        </div>
-        <div class="card">
-          <div class="cardTitle">Indicações válidas</div>
-          <div class="big" id="indicacoes">0</div>
-          <div class="muted smallText">Confirmadas pelo Espaço Vip</div>
-        </div>
-      </div>
-
       <div class="card">
-        <div class="cardTitle">Recompensas</div>
+        <div class="heroTitle">Meus pontos</div>
+        <p class="kicker">Aqui é o painel do cliente. (Nesta versão, é uma simulação local.)</p>
 
-        <div class="reward">
-          <div>
-            <div class="rewardName">3 amigas → Design de sobrancelhas GRATUITO</div>
-            <div class="muted smallText">Resgate seg–qua</div>
+        <div class="card" style="margin-top:12px;">
+          <div class="rowBetween">
+            <div class="pill">Pontos atuais: <span id="pontosAtual">0</span></div>
+            <div class="pill">Indicações confirmadas: <span id="indicacoesConfirmadas">0</span></div>
           </div>
-          <button class="btn small" id="btnResgatar3" disabled>Resgatar</button>
-        </div>
 
-        <div class="reward">
-          <div>
-            <div class="rewardName">5 amigas → R$ 15 de desconto</div>
-            <div class="muted smallText">Resgate seg–qua</div>
+          <div class="btnRow">
+            <button class="btn primary" id="btnValidar" type="button">
+              Validar (+5 cada)
+            </button>
+
+            <button class="btn danger small" id="btnReset" type="button">
+              Resetar dados deste aparelho
+            </button>
           </div>
-          <button class="btn small" id="btnResgatar5" disabled>Resgatar</button>
-        </div>
 
-        <div class="reward">
-          <div>
-            <div class="rewardName">8 amigas → Manicure simples</div>
-            <div class="muted smallText">Resgate seg–qua</div>
+          <div class="smallText" style="margin-top:10px;">
+            * Depois podemos integrar com um controle real (planilha / painel interno / etc.).
           </div>
-          <button class="btn small" id="btnResgatar8" disabled>Resgatar</button>
         </div>
-      </div>
-
-      <div class="card">
-        <div class="cardTitle">Próxima meta</div>
-        <div class="muted" id="proximaMeta">—</div>
       </div>
     </section>
 
     <!-- BENEFÍCIOS -->
     <section class="panel" id="tab-beneficios">
-      <h1>Benefícios do app</h1>
       <div class="card">
-        <ul class="bullets">
-          <li><strong>+5 pontos</strong> por amiga indicada e atendida</li>
-          <li><strong>3 amigas</strong> → Design de sobrancelhas gratuito</li>
-          <li><strong>5 amigas</strong> → R$ 15 de desconto</li>
-          <li><strong>8 amigas</strong> → Manicure simples</li>
-        </ul>
-      </div>
-      <div class="card">
-        <div class="cardTitle">Regra</div>
-        <div class="muted">Resgates de segunda a quarta, conforme disponibilidade.</div>
-      </div>
-      <button class="btn primary" id="btnAgenda3">Ver horários disponíveis</button>
-    </section>
+        <div class="heroTitle">Benefícios</div>
+        <p class="kicker">Resgates de segunda a quarta, conforme disponibilidade.</p>
 
-    <!-- ADMIN (ESCONDIDO) -->
-    <section class="panel" id="tab-admin">
-      <h1>Admin</h1>
-      <p class="muted">Validação manual de indicações.</p>
+        <div class="card" style="margin-top:12px;">
+          <div class="cardTitle">Metas por indicação</div>
+          <ul class="steps">
+            <li><strong>1 amiga</strong> → <strong>+5 pontos</strong></li>
+            <li><strong>3 amigas</strong> → <strong>Design de sobrancelhas GRATUITO</strong></li>
+            <li><strong>5 amigas</strong> → <strong>R$ 15 de desconto</strong></li>
+            <li><strong>8 amigas</strong> → <strong>Manicure simples</strong></li>
+          </ul>
+        </div>
 
-      <div class="card">
-        <label class="lbl">PIN</label>
-        <input class="inp" id="pin" type="password" placeholder="Digite o PIN" />
-
-        <label class="lbl">Quantidade de indicações</label>
-        <input class="inp" id="qtd" type="number" min="1" value="1" />
-
-        <button class="btn primary" id="btnValidar">Validar (+5 cada)</button>
-      </div>
-
-      <div class="card">
-        <button class="btn danger small" id="btnReset">Resetar dados deste aparelho</button>
+        <div class="btnRow">
+          <button class="btn primary" id="btnAgenda3" type="button">
+            IR PARA A AGENDA
+          </button>
+          <button class="btn ghost" id="btnWhatsBeneficios" type="button">
+            Falar comigo no WhatsApp
+          </button>
+        </div>
       </div>
     </section>
 
-    <footer class="foot">
-      <div class="muted smallText">Espaço Vip • Fidelidade exclusiva no app</div>
+    <footer>
+      <div class="smallText">Espaço Vip • Fidelidade exclusiva no app</div>
     </footer>
   </main>
 
-  <script src="app.js"></script>
+  <!-- SCRIPT (TUDO AQUI, PARA NÃO DEPENDER DE app.js) -->
   <script>
-    if ("serviceWorker" in navigator) {
-      navigator.serviceWorker.register("./service-worker.js");
+    // ===== CONFIG (ALTERE AQUI SE PRECISAR) =====
+    const AGENDA_URL =
+      "https://www.simplesagenda.com.br/agendamento_m.php?id=102e333dd822c1d9e0592ecf075e4bf4";
+
+    const WHATS_NUMERO = "5541992297612"; // 55 + DDD + número (sem espaços)
+    // ===========================================
+
+    function abrirAgenda() {
+      window.open(AGENDA_URL, "_blank", "noopener,noreferrer");
     }
+
+    function abrirWhats(mensagem) {
+      const url = "https://wa.me/" + WHATS_NUMERO + "?text=" + encodeURIComponent(mensagem);
+      window.open(url, "_blank", "noopener,noreferrer");
+    }
+
+    function bindClick(id, handler) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.addEventListener("click", (e) => {
+        e.preventDefault();
+        handler();
+      });
+    }
+
+    // ===== TABS =====
+    const tabs = document.querySelectorAll(".tab");
+    const panels = {
+      home: document.getElementById("tab-home"),
+      indicacao: document.getElementById("tab-indicacao"),
+      pontos: document.getElementById("tab-pontos"),
+      beneficios: document.getElementById("tab-beneficios"),
+    };
+
+    function showTab(name) {
+      tabs.forEach(t => t.classList.toggle("active", t.dataset.tab === name));
+      Object.keys(panels).forEach(k => panels[k].classList.toggle("show", k === name));
+      // Atualiza URL hash (opcional)
+      history.replaceState(null, "", "#" + name);
+    }
+
+    tabs.forEach(btn => {
+      btn.addEventListener("click", () => showTab(btn.dataset.tab));
+    });
+
+    // Carrega tab do hash (se existir)
+    const hash = (location.hash || "").replace("#", "");
+    if (hash && panels[hash]) showTab(hash);
+
+    // ===== CÓDIGO DO CLIENTE (SIMPLES, LOCAL) =====
+    function gerarCodigo() {
+      let code = localStorage.getItem("ev_codigo");
+      if (!code) {
+        const n = Math.floor(1000 + Math.random() * 9000);
+        code = "VIP-" + n;
+        localStorage.setItem("ev_codigo", code);
+      }
+      return code;
+    }
+
+    document.getElementById("meuCodigo").innerText = gerarCodigo();
+
+    // ===== PONTOS (SIMULAÇÃO LOCAL) =====
+    function getInt(key) {
+      return parseInt(localStorage.getItem(key) || "0", 10);
+    }
+    function setInt(key, value) {
+      localStorage.setItem(key, String(value));
+    }
+    function renderPontos() {
+      document.getElementById("pontosAtual").innerText = getInt("ev_pontos");
+      document.getElementById("indicacoesConfirmadas").innerText = getInt("ev_indicacoes");
+    }
+    renderPontos();
+
+    // ===== BOTÕES / LINKS =====
+    bindClick("btnAgenda", abrirAgenda);
+    bindClick("btnAbrirAgenda2", abrirAgenda);
+    bindClick("btnAgenda3", abrirAgenda);
+
+    bindClick("btnGoIndicacao", () => showTab("indicacao"));
+
+    bindClick("btnIndicar", () => {
+      const codigo = document.getElementById("meuCodigo").innerText.trim();
+      const msg =
+        "Olá 💗 Vim pelo APP Espaço Vip.\n\n" +
+        "Quero indicar uma amiga e participar da fidelidade.\n" +
+        "Meu código: " + codigo + "\n\n" +
+        "Pode me orientar?";
+      abrirWhats(msg);
+    });
+
+    bindClick("btnWhatsBeneficios", () => {
+      const codigo = document.getElementById("meuCodigo").innerText.trim();
+      const msg =
+        "Olá! Vim pelo APP Espaço Vip.\n" +
+        "Quero saber sobre benefícios e resgates.\n" +
+        "Meu código: " + codigo;
+      abrirWhats(msg);
+    });
+
+    bindClick("btnCopiarCodigo", async () => {
+      const codigo = document.getElementById("meuCodigo").innerText.trim();
+      if (!codigo) return;
+
+      try {
+        await navigator.clipboard.writeText(codigo);
+        alert("Código copiado: " + codigo);
+      } catch (e) {
+        const input = document.createElement("textarea");
+        input.value = codigo;
+        document.body.appendChild(input);
+        input.select();
+        document.execCommand("copy");
+        document.body.removeChild(input);
+        alert("Código copiado: " + codigo);
+      }
+    });
+
+    bindClick("btnValidar", () => {
+      // Simulação: +1 indicação confirmada e +5 pontos
+      const ind = getInt("ev_indicacoes") + 1;
+      const pts = getInt("ev_pontos") + 5;
+      setInt("ev_indicacoes", ind);
+      setInt("ev_pontos", pts);
+      renderPontos();
+      alert("Validado! +1 indicação e +5 pontos.");
+    });
+
+    bindClick("btnReset", () => {
+      if (!confirm("Quer resetar os dados deste aparelho?")) return;
+      localStorage.removeItem("ev_codigo");
+      localStorage.removeItem("ev_pontos");
+      localStorage.removeItem("ev_indicacoes");
+      location.reload();
+    });
   </script>
 </body>
 </html>
