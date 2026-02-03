@@ -9,14 +9,14 @@
 
   <style>
     :root{
-      --bg: #fbf3f7;          /* rosa bem claro */
+      --bg: #fbf3f7;
       --card: #ffffffcc;
       --text: #1f1f1f;
       --muted: #6b6b6b;
 
-      --pink: #f6dbe6;        /* rosa pastel */
+      --pink: #f6dbe6;
       --pink-2: #f1c6d8;
-      --gold: #d8b46a;        /* dourado */
+      --gold: #d8b46a;
       --gold-2: #caa24e;
 
       --shadow: 0 18px 45px rgba(0,0,0,.10);
@@ -40,7 +40,6 @@
       padding: 18px 14px 28px;
     }
 
-    /* Header */
     header{
       display:flex;
       align-items:center;
@@ -72,7 +71,6 @@
       font-size: 14px;
     }
 
-    /* Tabs */
     .tabs{
       display:flex;
       gap:10px;
@@ -97,14 +95,12 @@
       border-color: rgba(0,0,0,.08);
     }
 
-    /* Panels */
     .panel{
       display:none;
       padding: 10px 8px 0;
     }
     .panel.show{ display:block; }
 
-    /* Cards / Buttons */
     .grid{
       display:grid;
       grid-template-columns: 1fr;
@@ -218,12 +214,38 @@
     }
     .steps li{ margin: 7px 0; }
 
+    .deal{
+      border: 1px solid rgba(0,0,0,.06);
+      border-radius: 18px;
+      background: rgba(255,255,255,.78);
+      padding: 14px;
+      margin-top: 10px;
+      box-shadow: 0 10px 22px rgba(0,0,0,.06);
+    }
+    .deal h3{
+      margin: 0 0 6px;
+      font-size: 16px;
+      font-weight: 950;
+    }
+    .deal p{ margin: 0; }
+
+    .sectionTag{
+      display:inline-block;
+      font-weight: 950;
+      letter-spacing:.2px;
+      font-size: 12px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      background: rgba(241,198,216,.55);
+      border: 1px solid rgba(0,0,0,.06);
+      margin-bottom: 10px;
+    }
+
     footer{
       margin-top: 18px;
       padding: 8px 10px 0;
     }
 
-    /* Mobile */
     @media (min-width: 820px){
       .grid{ grid-template-columns: 1.2fr .8fr; }
     }
@@ -237,13 +259,14 @@
       <div class="logo">EV</div>
       <div class="titleBlock">
         <h1>Espaço Vip</h1>
-        <div class="sub">Fidelidade & Benefícios Exclusivos</div>
+        <div class="sub">Fidelidade • Promoções do Dia • Campanha do Mês</div>
       </div>
     </header>
 
     <!-- TABS -->
     <nav class="tabs" aria-label="Menu">
       <button class="tab active" data-tab="home" type="button">Início</button>
+      <button class="tab" data-tab="promocoes" type="button">Promoções</button>
       <button class="tab" data-tab="indicacao" type="button">Indicação</button>
       <button class="tab" data-tab="pontos" type="button">Meus pontos</button>
       <button class="tab" data-tab="beneficios" type="button">Benefícios</button>
@@ -261,19 +284,162 @@
               VER HORÁRIOS DISPONÍVEIS
             </button>
 
-            <button class="btn ghost" id="btnGoIndicacao" type="button">
-              Indique e ganhe benefícios
+            <button class="btn ghost" id="btnIrPromos" type="button">
+              Ver promoções do dia
             </button>
           </div>
         </div>
 
         <div class="card">
-          <div class="cardTitle">Regra de resgate</div>
+          <div class="cardTitle">Regras</div>
           <div class="smallText">
-            Resgates válidos de <strong>segunda a quarta</strong>, de acordo com disponibilidade da agenda.
-            <br><br>
-            Espaço Vip • Fidelidade exclusiva no app
+            • Resgates válidos de <strong>segunda a quarta</strong>, conforme disponibilidade.<br>
+            • Promoções <strong>não acumulativas</strong>.<br>
+            • Pacotes: pagamento do <strong>valor total na 1ª sessão</strong>.<br>
+            • Pacotes realizados <strong>1x por semana</strong>.
           </div>
+
+          <div class="btnRow">
+            <button class="btn ghost" id="btnWhatsAjuda" type="button">Falar comigo no WhatsApp</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROMOÇÕES -->
+    <section class="panel" id="tab-promocoes">
+      <div class="card">
+        <div class="sectionTag">PROMOÇÕES DO DIA</div>
+        <div class="heroTitle">Ative e me chame no WhatsApp</div>
+        <p class="kicker">Escolha a promoção do dia e clique em <strong>Ativar</strong>. Eu confirmo conforme disponibilidade.</p>
+
+        <!-- Segunda -->
+        <div class="deal">
+          <h3>Segunda-feira</h3>
+          <p class="smallText">Unhas • ofertas do dia</p>
+
+          <div class="btnRow">
+            <button class="btn primary" type="button"
+              onclick="ativarOferta('Segunda • Manicure R$25')">Ativar Manicure R$25</button>
+
+            <button class="btn ghost" type="button"
+              onclick="ativarOferta('Segunda • Manicure esmaltação em gel R$50')">Ativar Gel mão R$50</button>
+
+            <button class="btn ghost" type="button"
+              onclick="ativarOferta('Segunda • Pedicure esmaltação em gel R$60')">Ativar Gel pé R$60</button>
+
+            <button class="btn primary" type="button"
+              onclick="ativarOferta('Segunda • SPA dos pés com pedicure R$99,90')">Ativar SPA + Pedicure R$99,90</button>
+          </div>
+        </div>
+
+        <!-- Terça -->
+        <div class="deal">
+          <h3>Terça-feira</h3>
+          <p class="smallText">Sobrancelhas • ofertas do dia</p>
+
+          <div class="btnRow">
+            <button class="btn primary" type="button"
+              onclick="ativarOferta('Terça • Design de sobrancelhas R$25')">Ativar Design R$25</button>
+
+            <button class="btn ghost" type="button"
+              onclick="ativarOferta('Terça • Designer + Henna R$40')">Ativar Design + Henna R$40</button>
+
+            <button class="btn primary" type="button"
+              onclick="ativarOferta('Terça • Brow lamination R$80')">Ativar Brow lamination R$80</button>
+          </div>
+        </div>
+
+        <!-- Quarta -->
+        <div class="deal">
+          <h3>Quarta-feira</h3>
+          <p class="smallText">Pele • ofertas do dia</p>
+
+          <div class="btnRow">
+            <button class="btn primary" type="button"
+              onclick="ativarOferta('Quarta • Limpeza de pele intensa R$100')">Ativar Limpeza intensa R$100</button>
+
+            <button class="btn ghost" type="button"
+              onclick="ativarOferta('Quarta • Limpeza de pele ultrassônica R$140')">Ativar Ultrassônica R$140</button>
+
+            <button class="btn primary" type="button"
+              onclick="ativarOferta('Quarta • Limpeza de pele peeling de diamante R$80')">Ativar Peeling diamante R$80</button>
+          </div>
+        </div>
+
+        <!-- Quinta -->
+        <div class="deal">
+          <h3>Quinta-feira</h3>
+          <p class="smallText">Depilação • ofertas do dia</p>
+
+          <div class="btnRow">
+            <button class="btn primary" type="button"
+              onclick="ativarOferta('Quinta • Depilação íntima completa R$50')">Ativar Íntima completa R$50</button>
+
+            <button class="btn ghost" type="button"
+              onclick="ativarOferta('Quinta • Depilação completa (perna/coxa + íntima + axilas) R$110')">Ativar Completa R$110</button>
+          </div>
+        </div>
+
+        <!-- Sexta -->
+        <div class="deal">
+          <h3>Sexta-feira</h3>
+          <p class="smallText">Bronzeamento • ofertas do dia</p>
+
+          <div class="btnRow">
+            <button class="btn primary" type="button"
+              onclick="ativarOferta('Sexta • Bronzeamento R$90 (sem biquíni de fita) • cliente traz biquíni')">Ativar Bronze R$90 (sem fita)</button>
+
+            <button class="btn ghost" type="button"
+              onclick="ativarOferta('Sexta • 3 sessões Bronzeamento R$250 (sem fita)')">Ativar 3 sessões R$250</button>
+
+            <button class="btn primary" type="button"
+              onclick="ativarOferta('Sexta • Bronzeamento com fita R$120')">Ativar Bronze com fita R$120</button>
+
+            <button class="btn ghost" type="button"
+              onclick="ativarOferta('Sexta • 3 sessões Bronzeamento com fita R$330')">Ativar 3 sessões c/ fita R$330</button>
+          </div>
+        </div>
+
+        <div class="btnRow">
+          <button class="btn ghost" id="btnAgendaPromos" type="button">Agendar (ver horários)</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="sectionTag">CAMPANHA DO MÊS • FEVEREIRO / CARNAVAL</div>
+        <div class="heroTitle">Pacotes especiais</div>
+        <p class="kicker">Pacotes: pagamento do <strong>valor total na 1ª sessão</strong>. Realizado <strong>1x por semana</strong>. Não acumulativo.</p>
+
+        <div class="deal">
+          <h3>Bronzeamento • 4 sessões</h3>
+          <p class="muted">R$ 400</p>
+          <div class="btnRow">
+            <button class="btn primary" type="button"
+              onclick="ativarOferta('Fevereiro/Carnaval • Pacote Bronzeamento 4 sessões R$400 (pago na 1ª sessão, semanal, não acumulativo)')">Ativar pacote</button>
+          </div>
+        </div>
+
+        <div class="deal">
+          <h3>Massagem modeladora • 8 sessões</h3>
+          <p class="muted">R$ 480</p>
+          <div class="btnRow">
+            <button class="btn primary" type="button"
+              onclick="ativarOferta('Fevereiro/Carnaval • Pacote Modeladora 8 sessões R$480 (pago na 1ª sessão, semanal, não acumulativo)')">Ativar pacote</button>
+          </div>
+        </div>
+
+        <div class="deal">
+          <h3>Drenagem linfática • 4 sessões</h3>
+          <p class="muted">R$ 450</p>
+          <div class="btnRow">
+            <button class="btn primary" type="button"
+              onclick="ativarOferta('Fevereiro/Carnaval • Pacote Drenagem linfática 4 sessões R$450 (pago na 1ª sessão, semanal, não acumulativo)')">Ativar pacote</button>
+          </div>
+        </div>
+
+        <div class="btnRow">
+          <button class="btn ghost" id="btnAgendaCampanha" type="button">Agendar (ver horários)</button>
         </div>
       </div>
     </section>
@@ -282,15 +448,13 @@
     <section class="panel" id="tab-indicacao">
       <div class="card">
         <div class="heroTitle">Indique e ganhe</div>
-        <p class="kicker">
-          Cada amiga indicada e atendida gera <strong>+5 pontos</strong>.
-        </p>
+        <p class="kicker">Cada amiga indicada e atendida gera <strong>+5 pontos</strong>.</p>
 
         <div class="card" style="margin-top:12px;">
           <div class="rowBetween">
             <div>
               <div class="cardTitle">Seu código</div>
-              <div class="smallText">Compartilhe com a amiga na hora do agendamento.</div>
+              <div class="smallText">Compartilhe com a amiga.</div>
             </div>
 
             <div class="code" id="meuCodigo">VIP-0000</div>
@@ -316,10 +480,10 @@
         <div class="card" style="margin-top:12px;">
           <div class="cardTitle">Como funciona</div>
           <ol class="steps">
-            <li>Você clica em <strong>Indicar uma amiga</strong> e envia a mensagem pelo WhatsApp.</li>
+            <li>Você envia a indicação pelo WhatsApp.</li>
             <li>A amiga agenda e realiza o procedimento.</li>
             <li>Você ganha <strong>+5 pontos</strong> quando confirmado.</li>
-            <li>Ao atingir metas, você resgata benefícios (seg–qua).</li>
+            <li>Resgates seg–qua conforme disponibilidade.</li>
           </ol>
         </div>
       </div>
@@ -329,12 +493,12 @@
     <section class="panel" id="tab-pontos">
       <div class="card">
         <div class="heroTitle">Meus pontos</div>
-        <p class="kicker">Aqui é o painel do cliente. (Nesta versão, é uma simulação local.)</p>
+        <p class="kicker">Nesta versão, os pontos são controlados localmente neste aparelho.</p>
 
         <div class="card" style="margin-top:12px;">
           <div class="rowBetween">
-            <div class="pill">Pontos atuais: <span id="pontosAtual">0</span></div>
-            <div class="pill">Indicações confirmadas: <span id="indicacoesConfirmadas">0</span></div>
+            <div class="pill">Pontos: <span id="pontosAtual">0</span></div>
+            <div class="pill">Indicações: <span id="indicacoesConfirmadas">0</span></div>
           </div>
 
           <div class="btnRow">
@@ -348,7 +512,7 @@
           </div>
 
           <div class="smallText" style="margin-top:10px;">
-            * Depois podemos integrar com um controle real (planilha / painel interno / etc.).
+            * Depois podemos integrar com um controle real (planilha / painel).
           </div>
         </div>
       </div>
@@ -386,14 +550,13 @@
     </footer>
   </main>
 
-  <!-- SCRIPT (TUDO AQUI, PARA NÃO DEPENDER DE app.js) -->
   <script>
-    // ===== CONFIG (ALTERE AQUI SE PRECISAR) =====
+    // ===== CONFIG =====
     const AGENDA_URL =
       "https://www.simplesagenda.com.br/agendamento_m.php?id=102e333dd822c1d9e0592ecf075e4bf4";
 
-    const WHATS_NUMERO = "5541992297612"; // 55 + DDD + número (sem espaços)
-    // ===========================================
+    const WHATS_NUMERO = "5541992297612";
+    // ==================
 
     function abrirAgenda() {
       window.open(AGENDA_URL, "_blank", "noopener,noreferrer");
@@ -417,6 +580,7 @@
     const tabs = document.querySelectorAll(".tab");
     const panels = {
       home: document.getElementById("tab-home"),
+      promocoes: document.getElementById("tab-promocoes"),
       indicacao: document.getElementById("tab-indicacao"),
       pontos: document.getElementById("tab-pontos"),
       beneficios: document.getElementById("tab-beneficios"),
@@ -425,19 +589,15 @@
     function showTab(name) {
       tabs.forEach(t => t.classList.toggle("active", t.dataset.tab === name));
       Object.keys(panels).forEach(k => panels[k].classList.toggle("show", k === name));
-      // Atualiza URL hash (opcional)
       history.replaceState(null, "", "#" + name);
     }
 
-    tabs.forEach(btn => {
-      btn.addEventListener("click", () => showTab(btn.dataset.tab));
-    });
+    tabs.forEach(btn => btn.addEventListener("click", () => showTab(btn.dataset.tab)));
 
-    // Carrega tab do hash (se existir)
     const hash = (location.hash || "").replace("#", "");
     if (hash && panels[hash]) showTab(hash);
 
-    // ===== CÓDIGO DO CLIENTE (SIMPLES, LOCAL) =====
+    // ===== CÓDIGO DO CLIENTE (LOCAL) =====
     function gerarCodigo() {
       let code = localStorage.getItem("ev_codigo");
       if (!code) {
@@ -448,9 +608,10 @@
       return code;
     }
 
-    document.getElementById("meuCodigo").innerText = gerarCodigo();
+    // Atualiza todos elementos #meuCodigo (tem 2 na página)
+    document.querySelectorAll("#meuCodigo").forEach(el => el.innerText = gerarCodigo());
 
-    // ===== PONTOS (SIMULAÇÃO LOCAL) =====
+    // ===== PONTOS (LOCAL) =====
     function getInt(key) {
       return parseInt(localStorage.getItem(key) || "0", 10);
     }
@@ -458,72 +619,7 @@
       localStorage.setItem(key, String(value));
     }
     function renderPontos() {
-      document.getElementById("pontosAtual").innerText = getInt("ev_pontos");
-      document.getElementById("indicacoesConfirmadas").innerText = getInt("ev_indicacoes");
-    }
-    renderPontos();
-
-    // ===== BOTÕES / LINKS =====
-    bindClick("btnAgenda", abrirAgenda);
-    bindClick("btnAbrirAgenda2", abrirAgenda);
-    bindClick("btnAgenda3", abrirAgenda);
-
-    bindClick("btnGoIndicacao", () => showTab("indicacao"));
-
-    bindClick("btnIndicar", () => {
-      const codigo = document.getElementById("meuCodigo").innerText.trim();
-      const msg =
-        "Olá 💗 Vim pelo APP Espaço Vip.\n\n" +
-        "Quero indicar uma amiga e participar da fidelidade.\n" +
-        "Meu código: " + codigo + "\n\n" +
-        "Pode me orientar?";
-      abrirWhats(msg);
-    });
-
-    bindClick("btnWhatsBeneficios", () => {
-      const codigo = document.getElementById("meuCodigo").innerText.trim();
-      const msg =
-        "Olá! Vim pelo APP Espaço Vip.\n" +
-        "Quero saber sobre benefícios e resgates.\n" +
-        "Meu código: " + codigo;
-      abrirWhats(msg);
-    });
-
-    bindClick("btnCopiarCodigo", async () => {
-      const codigo = document.getElementById("meuCodigo").innerText.trim();
-      if (!codigo) return;
-
-      try {
-        await navigator.clipboard.writeText(codigo);
-        alert("Código copiado: " + codigo);
-      } catch (e) {
-        const input = document.createElement("textarea");
-        input.value = codigo;
-        document.body.appendChild(input);
-        input.select();
-        document.execCommand("copy");
-        document.body.removeChild(input);
-        alert("Código copiado: " + codigo);
-      }
-    });
-
-    bindClick("btnValidar", () => {
-      // Simulação: +1 indicação confirmada e +5 pontos
-      const ind = getInt("ev_indicacoes") + 1;
-      const pts = getInt("ev_pontos") + 5;
-      setInt("ev_indicacoes", ind);
-      setInt("ev_pontos", pts);
-      renderPontos();
-      alert("Validado! +1 indicação e +5 pontos.");
-    });
-
-    bindClick("btnReset", () => {
-      if (!confirm("Quer resetar os dados deste aparelho?")) return;
-      localStorage.removeItem("ev_codigo");
-      localStorage.removeItem("ev_pontos");
-      localStorage.removeItem("ev_indicacoes");
-      location.reload();
-    });
-  </script>
-</body>
-</html>
+      const p = getInt("ev_pontos");
+      const i = getInt("ev_indicacoes");
+      const pEl = document.getElementById("pontosAtual");
+      const iEl = document.getElementById("indicacoesConfirmadas");
