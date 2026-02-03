@@ -1,98 +1,151 @@
+/* ============ RESET / BASE ============ */
 :root{
-  --bg: #f7e9ef;         /* rosa pastel */
-  --card: #ffffff;
-  --text: #2d2325;
-  --muted: #7c6b70;
-  --gold: #c9a25d;       /* dourado suave */
-  --gold2:#b48b43;
-  --stroke: rgba(0,0,0,.08);
-  --shadow: 0 18px 45px rgba(0,0,0,.10);
-  --radius: 22px;
-  --radius2: 16px;
+  --bg1:#f7e3ea;          /* fundo rosa claro */
+  --bg2:#fff7fa;          /* fundo quase branco */
+  --card:#ffffffcc;       /* card translúcido */
+  --stroke:#ffffff;
+  --text:#2a1f23;
+  --muted:#6d5b61;
+
+  --primary:#c67d97;      /* rosa principal */
+  --primary2:#e8b9c8;     /* rosa claro */
+  --accent:#d8a85a;       /* dourado suave (opcional) */
+
+  --radius:22px;
+  --shadow: 0 18px 45px rgba(0,0,0,.12);
+  --shadowSoft: 0 10px 25px rgba(0,0,0,.08);
 }
 
-*{box-sizing:border-box}
-html,body{height:100%}
+*{ box-sizing:border-box; }
+html,body{ height:100%; }
 body{
   margin:0;
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  display:flex;
-  justify-content:center;
+  color:var(--text);
+  background:
+    radial-gradient(900px 600px at 30% 10%, #ffffffaa 0%, transparent 60%),
+    radial-gradient(900px 600px at 70% 90%, #ffffffaa 0%, transparent 60%),
+    linear-gradient(160deg, var(--bg1), var(--bg2));
 }
 
-/* “celular” no centro */
-.app{
+/* ============ LAYOUT PRINCIPAL ============ */
+.wrap{
   width:100%;
-  max-width: 430px;
-  min-height: 100vh;
-  padding: 16px 14px 28px;
+  max-width: 520px;        /* “cara de app” */
+  margin: 0 auto;
+  padding: 14px 14px 22px;
 }
 
-.top{
+header{
   display:flex;
   align-items:center;
   gap:12px;
-  margin-top: 6px;
-}
-.badge{
-  width:44px;height:44px;
-  border-radius: 50%;
-  background: rgba(255,255,255,.75);
-  border: 1px solid var(--stroke);
-  display:flex;align-items:center;justify-content:center;
-  font-weight:800;
-}
-.brand h1{
-  font-size: 24px;
-  margin:0;
-  line-height: 1.05;
-}
-.brand p{
-  margin:3px 0 0;
-  color: var(--muted);
-  font-size: 13px;
+  padding: 8px 4px 6px;
 }
 
-/* tabs estilo “pílula” */
-.tabs{
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-  margin: 14px 0 10px;
+.logo{
+  width:44px;
+  height:44px;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: var(--shadowSoft);
+  overflow:hidden;
+  display:grid;
+  place-items:center;
 }
+
+.logo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.brand{
+  display:flex;
+  flex-direction:column;
+  line-height:1.1;
+}
+
+.brand .title{
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: .2px;
+}
+.brand .sub{
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+/* ============ ABAS (TOPO) ============ */
+.tabs{
+  margin-top: 10px;
+  display:flex;
+  gap:10px;
+  overflow:auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 6px 2px 10px;
+}
+
 .tab{
-  border: 1px solid var(--stroke);
-  background: rgba(255,255,255,.75);
+  border:0;
+  background: #ffffffd6;
+  color: var(--text);
   padding: 10px 14px;
   border-radius: 999px;
   font-weight: 700;
+  font-size: 13px;
+  box-shadow: var(--shadowSoft);
+  white-space: nowrap;
   cursor:pointer;
+  transition: transform .05s ease;
 }
+
+.tab:active{ transform: scale(.98); }
+
 .tab.active{
-  outline: none;
-  border-color: rgba(180,139,67,.35);
-  box-shadow: 0 10px 18px rgba(180,139,67,.15);
+  background: linear-gradient(135deg, var(--primary), var(--primary2));
+  color: #fff;
 }
 
-.panel{display:none}
-.panel.show{display:block}
+/* ============ PAINÉIS ============ */
+.panel{
+  display:none;
+  animation: fade .18s ease;
+}
 
+.panel.show{ display:block; }
+
+@keyframes fade{
+  from{ opacity:.0; transform: translateY(4px); }
+  to{ opacity:1; transform: translateY(0); }
+}
+
+/* ============ CARDS ============ */
 .card{
   background: var(--card);
-  border: 1px solid var(--stroke);
+  border: 1px solid #ffffffb8;
   border-radius: var(--radius);
-  padding: 18px;
   box-shadow: var(--shadow);
-  margin-top: 12px;
+  padding: 16px;
+  backdrop-filter: blur(8px);
 }
 
+.card + .card{ margin-top: 12px; }
+
 .heroTitle{
-  font-size: 34px;
-  margin: 0 0 4px;
-  letter-spacing: -0.5px;
+  font-size: 26px;
+  font-weight: 900;
+  margin: 0 0 6px;
+  letter-spacing: -.2px;
 }
+
+.sectionTitle{
+  font-size: 18px;
+  font-weight: 900;
+  margin: 0 0 8px;
+}
+
 .muted{
   color: var(--muted);
   margin: 0 0 14px;
@@ -100,92 +153,103 @@ body{
   line-height: 1.35;
 }
 
-.btnRow{
-  display:flex;
-  gap:12px;
-  flex-wrap:wrap;
+.hr{
+  height: 1px;
+  background: #ffffffb8;
+  margin: 14px 0;
+  border-radius: 999px;
 }
+
+/* ============ LISTAS ============ */
+.steps{
+  padding-left: 18px;
+  margin: 10px 0 0;
+}
+.steps li{
+  margin: 6px 0;
+  color: var(--text);
+  font-weight: 600;
+}
+.steps li span,
+.steps li strong{
+  font-weight: 800;
+}
+
+/* ============ BOTÕES ============ */
 .btn{
   border:0;
-  border-radius: 16px;
-  padding: 14px 16px;
+  border-radius: 999px;
+  padding: 12px 14px;
   font-weight: 900;
   cursor:pointer;
-  width:100%;
+  width: 100%;
+  font-size: 14px;
+  box-shadow: var(--shadowSoft);
+  transition: transform .05s ease, filter .15s ease;
 }
+
+.btn:active{ transform: scale(.985); }
+
 .btn.primary{
-  background: linear-gradient(180deg, var(--gold), var(--gold2));
+  background: linear-gradient(135deg, var(--primary), #b86f89);
   color:#fff;
 }
+
 .btn.ghost{
-  background: #fff;
-  border: 1px solid var(--stroke);
+  background: #ffffffde;
   color: var(--text);
+  border: 1px solid #ffffff;
 }
-.btn.small{
-  padding:10px 12px;
-  border-radius: 14px;
-  width:auto;
-}
+
 .btn.danger{
-  background:#ffeded;
-  color:#9b2c2c;
-  border:1px solid rgba(155,44,44,.18);
+  background: #fff0f2;
+  border: 1px solid #ffd2da;
+  color: #8b2c3c;
 }
 
-.sectionTitle{
-  font-size: 20px;
-  margin: 0 0 6px;
-}
-.cardTitle{
-  font-weight:900;
-  margin:0 0 6px;
-}
-.smallText{
-  font-size: 13px;
-  color: var(--muted);
+.btn.small{
+  width:auto;
+  padding: 10px 12px;
+  font-size: 12px;
+  font-weight: 900;
 }
 
-.hr{
-  height:1px;
-  background: rgba(0,0,0,.06);
-  margin: 14px 0;
-}
-
-.input, select{
-  width:100%;
-  padding: 12px 12px;
-  border-radius: 14px;
-  border: 1px solid var(--stroke);
-  background:#fff;
-  font-size: 15px;
-  outline:none;
-}
-
+/* ============ LINHAS “CÓDIGO / COPIAR” ============ */
 .rowBetween{
   display:flex;
+  justify-content: space-between;
   align-items:center;
-  justify-content:space-between;
   gap:10px;
   flex-wrap:wrap;
 }
 
 .code{
-  font-weight: 900;
-  background: rgba(201,162,93,.15);
-  border:1px dashed rgba(201,162,93,.40);
+  background:#fff;
+  border: 1px solid #f1d7df;
   padding: 10px 12px;
   border-radius: 14px;
-  display:inline-block;
+  font-weight: 900;
+  letter-spacing: .6px;
+  box-shadow: var(--shadowSoft);
 }
 
-.steps{
-  margin: 8px 0 0 18px;
+.smallText{
+  font-size: 12px;
   color: var(--muted);
+  margin-top: 10px;
+  line-height: 1.3;
 }
-.steps li{margin:6px 0}
 
+/* ============ FOOTER ============ */
 .foot{
-  margin-top: 16px;
   text-align:center;
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 14px;
+  padding-bottom: 6px;
+}
+
+/* ============ AJUSTES PARA TELAS MAIORES ============ */
+@media (min-width: 720px){
+  .wrap{ padding-top: 24px; }
 }
