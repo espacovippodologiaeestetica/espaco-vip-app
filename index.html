@@ -1,255 +1,109 @@
-<!doctype html>
-<html lang="pt-br">
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="theme-color" content="#E7B6C6" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Espaço Vip</title>
 
-  <!-- Seu CSS -->
-  <link rel="stylesheet" href="styles.css" />
-
-  <!-- PWA -->
-  <link rel="manifest" href="manifest.json" />
-  <link rel="icon" href="icon-192.png.png" />
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-  <header class="top">
-    <div class="brand">
-      <div class="badge">EV</div>
-      <div>
-        <div class="brandTitle">Espaço Vip</div>
-        <div class="brandSub">Fidelidade • Promoções do Dia • Campanha do Mês</div>
-      </div>
+<main class="app">
+
+  <!-- MENU -->
+  <nav class="tabs">
+    <button class="tab active" data-tab="home">Início</button>
+    <button class="tab" data-tab="promos">Promoções</button>
+    <button class="tab" data-tab="indicacao">Indicação</button>
+    <button class="tab" data-tab="pontos">Meus pontos</button>
+    <button class="tab" data-tab="beneficios">Benefícios</button>
+  </nav>
+
+  <!-- HOME -->
+  <section class="panel show" id="tab-home">
+    <div class="card">
+      <h2>Agende com facilidade</h2>
+      <p>Veja os horários disponíveis e escolha com tranquilidade.</p>
+
+      <button class="btn primary" id="btnAgenda">Ver horários disponíveis</button>
+      <button class="btn ghost" id="btnGoPromos">Ver promoções do dia</button>
+      <button class="btn outline" id="btnWhats">Falar comigo no WhatsApp</button>
     </div>
-  </header>
+  </section>
 
-  <main class="wrap">
+  <!-- PROMOÇÕES -->
+  <section class="panel" id="tab-promos">
+    <div class="card">
+      <h2>Promoções da semana</h2>
 
-    <!-- MENU (tabs) -->
-    <nav class="tabs" aria-label="Menu">
-      <button class="tab active" data-tab="home" type="button">Início</button>
-      <button class="tab" data-tab="promos" type="button">Promoções</button>
-      <button class="tab" data-tab="indicacao" type="button">Indicação</button>
-      <button class="tab" data-tab="pontos" type="button">Meus pontos</button>
-      <button class="tab" data-tab="beneficios" type="button">Benefícios</button>
-    </nav>
+      <h3>Segunda</h3>
+      <ul>
+        <li>Manicure R$25</li>
+        <li>Manicure em gel R$50</li>
+        <li>Pedicure em gel R$60</li>
+        <li>SPA dos pés + pedicure R$99,90</li>
+      </ul>
+      <button class="btn primary" id="promoSegunda">Ativar oferta de segunda</button>
 
-    <!-- HOME -->
-    <section class="panel show" id="tab-home">
-      <div class="card">
-        <div class="heroTitle">Agende com facilidade</div>
-        <p class="muted">
-          Veja primeiro os horários disponíveis e escolha com tranquilidade.
-        </p>
+      <hr>
 
-        <a class="btn primary" id="btnAgenda" href="#" rel="noopener">Ver horários disponíveis</a>
+      <h3>Campanha de Fevereiro – Carnaval</h3>
+      <ul>
+        <li>Bronzeamento 4 sessões R$400</li>
+        <li>Massagem modeladora 8 sessões R$480</li>
+        <li>Drenagem linfática 4 sessões R$450</li>
+      </ul>
+      <button class="btn primary" id="promoCarnaval">Ativar campanha</button>
+    </div>
+  </section>
 
-        <button class="btn ghost" id="btnGoPromos" type="button">Ver promoções do dia</button>
+  <!-- INDICAÇÃO -->
+  <section class="panel" id="tab-indicacao">
+    <div class="card">
+      <h2>Indique e ganhe</h2>
+      <p>Cada amiga indicada gera <strong>+5 pontos</strong>.</p>
 
-        <div class="spacer"></div>
-
-        <button class="btn outline" id="btnWhats" type="button">Falar comigo no WhatsApp</button>
+      <div class="codeBox">
+        Seu código:
+        <div id="meuCodigo">VIP-0000</div>
       </div>
 
-      <div class="card">
-        <div class="cardTitle">Regras</div>
-        <ul class="steps">
-          <li>Resgates/prêmios: de segunda a quarta, conforme disponibilidade da agenda.</li>
-          <li>Promoções: não acumulativas.</li>
-          <li>Pacotes: pagamento do valor total na 1ª sessão.</li>
-          <li>Pacotes: realizados 1x por semana.</li>
-        </ul>
-      </div>
-    </section>
+      <button class="btn primary" id="btnIndicar">Indicar uma amiga</button>
+      <button class="btn ghost" id="btnCopiarCodigo">Copiar código</button>
+    </div>
+  </section>
 
-    <!-- PROMOÇÕES -->
-    <section class="panel" id="tab-promos">
-      <div class="card">
-        <h2 class="sectionTitle">Promoções da semana</h2>
-        <p class="muted">Ative a oferta e fale direto no WhatsApp (mensagem pronta).</p>
+  <!-- PONTOS -->
+  <section class="panel" id="tab-pontos">
+    <div class="card">
+      <h2>Meus pontos</h2>
+      <p>Aqui aparecerão seus pontos.</p>
+      <button class="btn ghost" id="btnValidar">Validar pontos</button>
+    </div>
+  </section>
 
-        <div class="promoBlock">
-          <div class="cardTitle">Segunda</div>
-          <ul class="steps">
-            <li>Manicure R$25</li>
-            <li>Manicure esmaltação em gel R$50</li>
-            <li>Pedicure esmaltação em gel R$60</li>
-            <li>SPA dos pés com pedicure R$99,90</li>
-          </ul>
-          <button class="btn primary" id="promoSegunda" type="button">Ativar oferta de segunda</button>
-        </div>
+  <!-- BENEFÍCIOS -->
+  <section class="panel" id="tab-beneficios">
+    <div class="card">
+      <h2>Benefícios</h2>
+      <ul>
+        <li>Promoções exclusivas</li>
+        <li>Indicação com pontos</li>
+        <li>Resgates de segunda a quarta</li>
+      </ul>
+      <button class="btn primary" id="btnWhats2">Falar comigo no WhatsApp</button>
+    </div>
+  </section>
 
-        <div class="hr"></div>
+  <footer class="foot">
+    <div class="smallText">Espaço Vip • Fidelidade exclusiva no app</div>
+  </footer>
 
-        <div class="promoBlock">
-          <div class="cardTitle">Terça</div>
-          <ul class="steps">
-            <li>Design de Sobrancelhas R$25</li>
-            <li>Designer e Henna R$40</li>
-            <li>Brow lamination R$80</li>
-          </ul>
-          <button class="btn primary" id="promoTerca" type="button">Ativar oferta de terça</button>
-        </div>
+</main>
 
-        <div class="hr"></div>
-
-        <div class="promoBlock">
-          <div class="cardTitle">Quarta</div>
-          <ul class="steps">
-            <li>Limpeza de pele intensa R$100</li>
-            <li>Limpeza de pele ultrassônica R$140</li>
-            <li>Limpeza de pele peeling de diamante R$80</li>
-          </ul>
-          <button class="btn primary" id="promoQuarta" type="button">Ativar oferta de quarta</button>
-        </div>
-
-        <div class="hr"></div>
-
-        <div class="promoBlock">
-          <div class="cardTitle">Quinta</div>
-          <ul class="steps">
-            <li>Depilação íntima completa R$50</li>
-            <li>Depilação completa (perna/coxa, íntima, axilas) R$110</li>
-          </ul>
-          <button class="btn primary" id="promoQuinta" type="button">Ativar oferta de quinta</button>
-        </div>
-
-        <div class="hr"></div>
-
-        <div class="promoBlock">
-          <div class="cardTitle">Sexta</div>
-          <ul class="steps">
-            <li>Bronzeamento R$90 (sem biquíni de fita) — cliente trazer biquíni</li>
-            <li>3 sessões R$250</li>
-            <li>Bronzeamento com fita R$120</li>
-            <li>3 sessões R$330</li>
-          </ul>
-          <button class="btn primary" id="promoSexta" type="button">Ativar oferta de sexta</button>
-        </div>
-
-        <div class="hr"></div>
-
-        <div class="promoBlock">
-          <h2 class="sectionTitle">Campanha de Fevereiro — Carnaval</h2>
-          <ul class="steps">
-            <li>Bronzeamento 4 sessões R$400</li>
-            <li>Massagem modeladora 8 sessões R$480</li>
-            <li>Drenagem linfática 4 sessões R$450</li>
-          </ul>
-          <p class="smallText">
-            <strong>Observação:</strong> pacotes pagos na 1ª sessão (valor total). Não acumulativo. Realizados 1x por semana.
-          </p>
-          <button class="btn primary" id="promoCarnaval" type="button">Ativar campanha de Fevereiro</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- INDICAÇÃO -->
-    <section class="panel" id="tab-indicacao">
-      <div class="card">
-        <h2 class="sectionTitle">Indique e ganhe</h2>
-        <p class="muted">Cada amiga indicada e atendida gera <strong>+5 pontos</strong>.</p>
-
-        <div class="rowBetween">
-          <div>
-            <div class="cardTitle">Seu código</div>
-            <div class="code" id="meuCodigo">VIP-0000</div>
-          </div>
-          <button class="btn small" id="btnCopiarCodigo" type="button">Copiar</button>
-        </div>
-
-        <div class="spacer"></div>
-
-        <button class="btn primary" id="btnIndicar" type="button">INDICAR UMA AMIGA (WhatsApp)</button>
-        <button class="btn ghost" id="btnAbrirAgenda2" type="button">Ver horários disponíveis</button>
-
-        <div class="card soft">
-          <div class="cardTitle">Recompensas</div>
-          <ul class="steps">
-            <li>3 amigas: Design de sobrancelhas <strong>GRATUITO</strong></li>
-            <li>5 amigas: <strong>R$15</strong> de desconto</li>
-            <li>8 amigas: Manicure simples</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- PONTOS -->
-    <section class="panel" id="tab-pontos">
-      <div class="card">
-        <h2 class="sectionTitle">Meus pontos</h2>
-        <p class="muted">Aqui aparecem seus pontos neste aparelho.</p>
-
-        <div class="rowBetween">
-          <div>
-            <div class="cardTitle">Pontos</div>
-            <div class="code" id="meusPontos">0</div>
-          </div>
-          <button class="btn small" id="btnValidar" type="button">Validar (+5 cada)</button>
-        </div>
-
-        <div class="hr"></div>
-
-        <button class="btn danger small" id="btnReset" type="button">Resetar dados deste aparelho</button>
-      </div>
-    </section>
-
-    <!-- BENEFÍCIOS -->
-    <section class="panel" id="tab-beneficios">
-      <div class="card">
-        <h2 class="sectionTitle">Benefícios</h2>
-        <ul class="steps">
-          <li>Promoções exclusivas para quem usa o app</li>
-          <li>Indicação de amigas com pontos</li>
-          <li>Resgates de segunda a quarta (conforme disponibilidade)</li>
-        </ul>
-
-        <div class="hr"></div>
-
-        <button class="btn primary" id="btnWhats2" type="button">Falar comigo no WhatsApp</button>
-      </div>
-    </section>
-
-    <footer class="foot">
-      <div class="muted smallText">Espaço Vip • Fidelidade exclusiva no app</div>
-    </footer>
-  </main>
-
-  <!-- JS -->
-  <script src="app.js"></script>
-
-  <!-- tabs handler (mantém no index) -->
-  <script>
-    // Troca de abas (tabs)
-    (function () {
-      const tabs = document.querySelectorAll(".tab");
-      const panels = {
-        home: document.getElementById("tab-home"),
-        promos: document.getElementById("tab-promos"),
-        indicacao: document.getElementById("tab-indicacao"),
-        pontos: document.getElementById("tab-pontos"),
-        beneficios: document.getElementById("tab-beneficios"),
-      };
-
-      function show(tab) {
-        tabs.forEach(t => t.classList.toggle("active", t.dataset.tab === tab));
-        Object.keys(panels).forEach(k => panels[k].classList.toggle("show", k === tab));
-      }
-
-      tabs.forEach(btn => {
-        btn.addEventListener("click", () => show(btn.dataset.tab));
-      });
-
-      // inicial
-      show("home");
-    })();
-
-    // PWA (service worker)
-    if ("serviceWorker" in navigator) {
-      navigator.serviceWorker.register("./service-worker.js");
-    }
-  </script>
+<!-- JS ÚNICO -->
+<script src="app.js?v=10"></script>
 </body>
 </html>
