@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   // ===== CONFIGURE AQUI =====
   const AGENDA_URL =
-    "https://www.simplesagenda.com.br/agendamento_m.php?id=10e2333dd822c1d9e0592ecf075e4bf4";
+    "http://www.simplesagenda.com.br/agendamento_m.php?id=102e333dd822c1d9e0592ecf075e4bf4";
 
   // Seu número com DDI +55 e DDD, só números:
   const WHATS_NUMERO = "5541992297612";
