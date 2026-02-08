@@ -1,222 +1,495 @@
 <!doctype html>
-<html lang="pt-br">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="theme-color" content="#e7b6c8" />
-  <title>Espaço Vip</title>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>Espaço Vip • Fidelidade</title>
 
-  <link rel="manifest" href="./manifest.json" />
-  <link rel="icon" href="./icon-192.png" />
-  <link rel="apple-touch-icon" href="./icon-192.png" />
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#d8a4b4" />
 
-  <link rel="stylesheet" href="./styles.css?v=6" />
-</head>
+    <link rel="icon" href="icon-192.png" />
+    <link rel="apple-touch-icon" href="icon-192.png" />
 
-<body>
-  <header class="topbar">
-    <div class="brand">
-      <div class="logoCircle">EV</div>
-      <div>
-        <div class="brandTitle">Espaço Vip</div>
+    <link rel="stylesheet" href="styles.css" />
+
+    <style>
+      :root {
+        --bg: #f7edf1;
+        --card: rgba(255, 255, 255, 0.78);
+        --stroke: rgba(0, 0, 0, 0.06);
+        --text: #2b2b2b;
+        --muted: rgba(0, 0, 0, 0.55);
+        --primary: #c8899b;
+        --primary2: #b9798b;
+        --radius: 18px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+        background: radial-gradient(
+            circle at 10% 10%,
+            rgba(200, 137, 155, 0.15),
+            transparent 45%
+          ),
+          radial-gradient(
+            circle at 90% 30%,
+            rgba(216, 164, 180, 0.22),
+            transparent 50%
+          ),
+          var(--bg);
+        color: var(--text);
+      }
+
+      header {
+        padding: 18px 16px 10px;
+      }
+      .brand {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+      .brandTop {
+        font-weight: 700;
+        letter-spacing: 0.2px;
+      }
+      .brandSub {
+        font-size: 13px;
+        color: var(--muted);
+      }
+
+      .tabsWrap {
+        padding: 10px 12px 4px;
+        position: sticky;
+        top: 0;
+        backdrop-filter: blur(10px);
+        background: rgba(247, 237, 241, 0.7);
+        border-bottom: 1px solid var(--stroke);
+        z-index: 20;
+      }
+      .tabs {
+        display: flex;
+        gap: 10px;
+        overflow-x: auto;
+        padding-bottom: 6px;
+      }
+      .tab {
+        flex: 0 0 auto;
+        border: 1px solid var(--stroke);
+        background: rgba(255, 255, 255, 0.7);
+        color: var(--text);
+        padding: 10px 14px;
+        border-radius: 999px;
+        font-weight: 650;
+        cursor: pointer;
+        white-space: nowrap;
+      }
+      .tab.active {
+        background: linear-gradient(180deg, var(--primary), var(--primary2));
+        color: #fff;
+        border-color: transparent;
+      }
+
+      main {
+        padding: 14px 12px 26px;
+        max-width: 820px;
+        margin: 0 auto;
+      }
+
+      .panel {
+        display: none;
+      }
+      .panel.show {
+        display: block;
+      }
+
+      .card {
+        background: var(--card);
+        border: 1px solid var(--stroke);
+        border-radius: var(--radius);
+        padding: 18px;
+        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+      }
+      .heroTitle {
+        font-size: 34px;
+        line-height: 1.05;
+        margin: 0 0 8px;
+        letter-spacing: -0.6px;
+      }
+      .muted {
+        color: var(--muted);
+        margin: 0 0 14px;
+      }
+
+      .btnRow {
+        display: grid;
+        gap: 10px;
+        margin-top: 10px;
+      }
+      .btn {
+        width: 100%;
+        border: 0;
+        padding: 14px 14px;
+        border-radius: 999px;
+        font-weight: 750;
+        cursor: pointer;
+        font-size: 15px;
+      }
+      .btnPrimary {
+        background: linear-gradient(180deg, var(--primary), var(--primary2));
+        color: #fff;
+      }
+      .btnGhost {
+        background: rgba(0, 0, 0, 0.05);
+        color: #111;
+        border: 1px solid var(--stroke);
+      }
+      .btnWhite {
+        background: rgba(255, 255, 255, 0.85);
+        color: #111;
+        border: 1px solid var(--stroke);
+      }
+
+      .hr {
+        height: 1px;
+        background: var(--stroke);
+        margin: 14px 0;
+      }
+
+      .sectionTitle {
+        font-weight: 800;
+        margin: 0 0 10px;
+      }
+
+      .steps {
+        margin: 0;
+        padding-left: 18px;
+        color: rgba(0, 0, 0, 0.78);
+      }
+      .steps li {
+        margin: 7px 0;
+      }
+
+      .gridTwo {
+        display: grid;
+        gap: 12px;
+      }
+      @media (min-width: 720px) {
+        .gridTwo {
+          grid-template-columns: 1fr 1fr;
+          align-items: start;
+        }
+      }
+
+      .smallText {
+        font-size: 12px;
+        color: var(--muted);
+        margin-top: 8px;
+      }
+
+      footer {
+        margin-top: 16px;
+        text-align: center;
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      .codeBox {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 12px;
+        border-radius: 12px;
+        border: 1px dashed rgba(0, 0, 0, 0.16);
+        background: rgba(255, 255, 255, 0.7);
+        font-weight: 800;
+        letter-spacing: 0.6px;
+      }
+
+      .rowBetween {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .pill {
+        display: inline-block;
+        padding: 8px 10px;
+        border-radius: 999px;
+        border: 1px solid var(--stroke);
+        background: rgba(255, 255, 255, 0.65);
+        font-weight: 700;
+        font-size: 12px;
+        color: rgba(0, 0, 0, 0.65);
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div class="brand">
+        <div class="brandTop">EV • Espaço Vip</div>
         <div class="brandSub">Fidelidade • Promoções do Dia • Campanha do Mês</div>
       </div>
+    </header>
+
+    <div class="tabsWrap">
+      <nav class="tabs">
+        <button class="tab active" data-tab="home">Início</button>
+        <button class="tab" data-tab="promos">Promoções</button>
+        <button class="tab" data-tab="indicacao">Indicação</button>
+        <button class="tab" data-tab="pontos">Meus pontos</button>
+        <button class="tab" data-tab="beneficios">Benefícios</button>
+      </nav>
     </div>
-  </header>
 
-  <main class="wrap">
-    <!-- MENU -->
-    <nav class="tabs" aria-label="Menu">
-      <button class="tab active" data-tab="home" type="button">Início</button>
-      <button class="tab" data-tab="promos" type="button">Promoções</button>
-      <button class="tab" data-tab="indicacao" type="button">Indicação</button>
-      <button class="tab" data-tab="pontos" type="button">Meus pontos</button>
-      <button class="tab" data-tab="beneficios" type="button">Benefícios</button>
-    </nav>
+    <main>
+      <!-- HOME -->
+      <section class="panel show" id="tab-home">
+        <div class="card">
+          <h1 class="heroTitle">Agende com facilidade</h1>
+          <p class="muted">
+            Veja primeiro os horários disponíveis e escolha com tranquilidade.
+          </p>
 
-    <!-- HOME -->
-    <section class="panel show" id="tab-home">
-      <div class="card">
-        <div class="heroTitle">Agende com facilidade</div>
-        <p class="muted">
-          Veja primeiro os horários disponíveis e escolha com tranquilidade.
-        </p>
+          <div class="btnRow">
+            <button class="btn btnPrimary" id="btnAgenda" type="button">
+              VER HORÁRIOS DISPONÍVEIS
+            </button>
 
-        <div class="row">
-          <button id="btnAgenda" class="btn primary" type="button">
-  VER HORÁRIOS DISPONÍVEIS
-</button>
-          <button class="btn soft" id="btnGoPromos" type="button">Ver promoções do dia</button>
-        </div>
+            <button class="btn btnGhost" id="btnGoPromos" type="button">
+              Ver promoções do dia
+            </button>
 
-        <div class="hr"></div>
-
-        <button class="btn ghost" id="btnWhats" type="button">Falar comigo no WhatsApp</button>
-      </div>
-
-      <div class="card">
-        <div class="cardTitle">Regras</div>
-        <ul class="steps">
-          <li>Resgates/prêmios: de segunda a quarta, conforme disponibilidade da agenda.</li>
-          <li>Promoções: não acumulativas.</li>
-          <li>Pacotes: pagamento do valor total na 1ª sessão.</li>
-          <li>Pacotes: realizados 1x por semana.</li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- PROMOÇÕES -->
-    <section class="panel" id="tab-promos">
-      <div class="card">
-        <h2 class="sectionTitle">Promoções da semana</h2>
-        <p class="muted">Ative a oferta e a mensagem já vai pronta no WhatsApp.</p>
-
-        <div class="promoBlock">
-          <div class="cardTitle">Segunda</div>
-          <ul class="steps">
-            <li>Manicure R$25</li>
-            <li>Manicure esmaltação em gel R$50</li>
-            <li>Pedicure esmaltação em gel R$60</li>
-            <li>SPA dos pés com pedicure R$99,90</li>
-          </ul>
-          <button class="btn primary" id="promoSegunda" type="button">Ativar oferta de segunda</button>
-        </div>
-
-        <div class="hr"></div>
-
-        <div class="promoBlock">
-          <div class="cardTitle">Terça</div>
-          <ul class="steps">
-            <li>Design de Sobrancelhas R$25</li>
-            <li>Designer e Henna R$40</li>
-            <li>Brow lamination R$80</li>
-          </ul>
-          <button class="btn primary" id="promoTerca" type="button">Ativar oferta de terça</button>
-        </div>
-
-        <div class="hr"></div>
-
-        <div class="promoBlock">
-          <div class="cardTitle">Quarta</div>
-          <ul class="steps">
-            <li>Limpeza de pele intensa R$100</li>
-            <li>Limpeza de pele ultrassônica R$140</li>
-            <li>Limpeza de pele peeling de diamante R$80</li>
-          </ul>
-          <button class="btn primary" id="promoQuarta" type="button">Ativar oferta de quarta</button>
-        </div>
-
-        <div class="hr"></div>
-
-        <div class="promoBlock">
-          <div class="cardTitle">Quinta</div>
-          <ul class="steps">
-            <li>Depilação íntima completa R$50</li>
-            <li>Depilação completa (perna/coxa, íntima, axilas) R$110</li>
-          </ul>
-          <button class="btn primary" id="promoQuinta" type="button">Ativar oferta de quinta</button>
-        </div>
-
-        <div class="hr"></div>
-
-        <div class="promoBlock">
-          <div class="cardTitle">Sexta</div>
-          <ul class="steps">
-            <li>Bronzeamento R$90 (sem biquíni de fita) — cliente traz biquíni</li>
-            <li>3 sessões R$250</li>
-            <li>Bronzeamento com fita R$120</li>
-            <li>3 sessões R$330</li>
-          </ul>
-          <button class="btn primary" id="promoSexta" type="button">Ativar oferta de sexta</button>
-        </div>
-
-        <div class="hr"></div>
-
-        <h2 class="sectionTitle">Campanha do mês — Fevereiro (Carnaval)</h2>
-        <ul class="steps">
-          <li>Bronzeamento 4 sessões R$400</li>
-          <li>Massagem modeladora 8 sessões R$480</li>
-          <li>Drenagem linfática 4 sessões R$450</li>
-        </ul>
-        <p class="muted"><strong>Observação:</strong> pacotes pagos na 1ª sessão (valor total). Não acumulativo.</p>
-        <button class="btn primary" id="promoCarnaval" type="button">Ativar campanha de fevereiro</button>
-      </div>
-    </section>
-
-    <!-- INDICAÇÃO -->
-    <section class="panel" id="tab-indicacao">
-      <div class="card">
-        <h2 class="sectionTitle">Indique e ganhe</h2>
-        <p class="muted">Cada amiga indicada e atendida gera <strong>+5 pontos</strong>.</p>
-
-        <div class="rowBetween">
-          <div>
-            <div class="cardTitle">Seu código</div>
-            <div class="code" id="meuCodigo">VIP-0000</div>
+            <button class="btn btnWhite" id="btnWhats" type="button">
+              Falar comigo no WhatsApp
+            </button>
           </div>
-          <button class="btn small" id="btnCopiarCodigo" type="button">Copiar</button>
         </div>
 
-        <div class="hr"></div>
+        <div style="height: 14px"></div>
 
-        <!-- IMPORTANTE: este botão é para COMPARTILHAR com a amiga -->
-        <button class="btn primary" id="btnIndicar" type="button">Compartilhar convite (WhatsApp)</button>
+        <div class="card">
+          <div class="sectionTitle">Regras</div>
+          <ul class="steps">
+            <li>
+              <strong>Resgates/prêmios:</strong> de segunda a quarta, conforme
+              disponibilidade da agenda.
+            </li>
+            <li><strong>Promoções:</strong> não acumulativas.</li>
+            <li>
+              <strong>Pacotes:</strong> pagamento do valor total na 1ª sessão.
+            </li>
+            <li><strong>Pacotes:</strong> realizados 1x por semana.</li>
+          </ul>
+        </div>
 
-        <div class="hr"></div>
+        <footer>Espaço Vip • Fidelidade exclusiva no app</footer>
+      </section>
 
-        <button class="btn ghost" id="btnAbrirAgenda2" type="button">Ver horários disponíveis</button>
-      </div>
-    </section>
+      <!-- PROMOÇÕES -->
+      <section class="panel" id="tab-promos">
+        <div class="gridTwo">
+          <div class="card">
+            <h2 class="sectionTitle">Promoções da semana</h2>
+            <p class="muted">Ative a oferta e a mensagem já vai pronta no WhatsApp.</p>
 
-    <!-- PONTOS -->
-    <section class="panel" id="tab-pontos">
-      <div class="card">
-        <h2 class="sectionTitle">Meus pontos</h2>
-        <p class="muted">Aqui aparecem seus pontos neste aparelho.</p>
+            <div class="hr"></div>
+            <div class="pill">Segunda-feira</div>
+            <ul class="steps">
+              <li><strong>Manicure e pedicure</strong> — R$55</li>
+              <li>
+                <strong>Manicure e pedicure com esmaltação em gel</strong> — R$130
+                (ganha SPA do pé)
+              </li>
+            </ul>
+            <button class="btn btnPrimary" id="promoSegunda" type="button">
+              Ativar oferta de segunda
+            </button>
 
-        <div class="rowBetween">
-          <div>
-            <div class="cardTitle">Pontos</div>
-            <div class="code" id="meusPontos">0</div>
+            <div class="hr"></div>
+            <div class="pill">Terça-feira</div>
+            <ul class="steps">
+              <li><strong>Depilação íntima completa</strong> — R$50</li>
+              <li>
+                <strong>Depilação completa</strong> — R$130 (perna completa, íntima completa, linha alba e axilas)
+              </li>
+              <li><strong>Designer de sobrancelhas + buço</strong> — R$38</li>
+            </ul>
+            <button class="btn btnPrimary" id="promoTerca" type="button">
+              Ativar oferta de terça
+            </button>
+
+            <div class="hr"></div>
+            <div class="pill">Quarta-feira</div>
+            <ul class="steps">
+              <li><strong>Limpeza de pele</strong> — R$99,99</li>
+              <li><strong>Peeling de diamante</strong> — R$50 (não tem extração)</li>
+            </ul>
+            <button class="btn btnPrimary" id="promoQuarta" type="button">
+              Ativar oferta de quarta
+            </button>
+
+            <div class="hr"></div>
+            <div class="pill">Quinta-feira</div>
+            <ul class="steps">
+              <li><strong>Bronzeamento artificial</strong> — R$90 (biquíni da cliente)</li>
+              <li><strong>Bronzeamento com biquíni de fita</strong> — R$118</li>
+              <li><strong>Bronzeamento + massagem</strong> — R$150</li>
+            </ul>
+            <button class="btn btnPrimary" id="promoQuinta" type="button">
+              Ativar oferta de quinta
+            </button>
           </div>
-          <button class="btn primary small" id="btnValidar" type="button">Validar (+5 cada)</button>
+
+          <div class="card">
+            <h2 class="sectionTitle">Campanha do mês</h2>
+            <p class="muted">
+              Se quiser, mantenha aqui sua campanha mensal (quando houver).
+            </p>
+
+            <div class="hr"></div>
+
+            <ul class="steps">
+              <li>Atualize aqui quando tiver campanha ativa.</li>
+              <li>Ex.: pacotes, datas comemorativas, combos.</li>
+            </ul>
+
+            <button class="btn btnGhost" id="promoCarnaval" type="button">
+              Ativar campanha do mês
+            </button>
+
+            <p class="smallText">
+              (Você pode trocar o texto da campanha no WhatsApp dentro do app.js.)
+            </p>
+          </div>
         </div>
 
-        <div class="hr"></div>
+        <footer>Espaço Vip • Fidelidade exclusiva no app</footer>
+      </section>
 
-        <button class="btn danger small" id="btnReset" type="button">Resetar dados deste aparelho</button>
-      </div>
-    </section>
+      <!-- INDICAÇÃO -->
+      <section class="panel" id="tab-indicacao">
+        <div class="card">
+          <h2 class="sectionTitle">Indicação</h2>
+          <p class="muted">
+            Indique uma amiga e fale comigo no WhatsApp com a mensagem pronta.
+          </p>
 
-    <!-- BENEFÍCIOS -->
-    <section class="panel" id="tab-beneficios">
-      <div class="card">
-        <h2 class="sectionTitle">Benefícios</h2>
-        <ul class="steps">
-          <li>Promoções exclusivas para quem usa o app.</li>
-          <li>Indicação de amigas com pontos.</li>
-          <li>Resgates de segunda a quarta (conforme disponibilidade).</li>
-        </ul>
+          <div class="rowBetween">
+            <div>
+              <div class="smallText">Seu código</div>
+              <div class="codeBox" id="meuCodigo">VIP-0000</div>
+            </div>
 
-        <div class="hr"></div>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap">
+              <button class="btn btnGhost" id="btnCopiarCodigo" type="button">
+                Copiar código
+              </button>
+              <button class="btn btnPrimary" id="btnIndicar" type="button">
+                Indicar uma amiga (WhatsApp)
+              </button>
+            </div>
+          </div>
 
-        <button class="btn primary" id="btnWhats2" type="button">Falar comigo no WhatsApp</button>
-      </div>
-    </section>
+          <div class="hr"></div>
 
-    <footer class="foot">
-      <div class="muted smallText">Espaço Vip • Fidelidade exclusiva no app</div>
-    </footer>
-  </main>
+          <button class="btn btnWhite" id="btnAbrirAgenda2" type="button">
+            Ver horários disponíveis
+          </button>
+        </div>
 
-  <!-- JS -->
-  <script src="./app.js?v=6"></script>
+        <footer>Espaço Vip • Fidelidade exclusiva no app</footer>
+      </section>
 
-  <!-- PWA -->
-  <script>
-    if ("serviceWorker" in navigator) {
-      navigator.serviceWorker.register("./service-worker.js");
-    }
-  </script>
-</body>
+      <!-- PONTOS -->
+      <section class="panel" id="tab-pontos">
+        <div class="card">
+          <h2 class="sectionTitle">Meus pontos</h2>
+          <p class="muted">
+            Aqui você pode acompanhar seus pontos neste aparelho.
+          </p>
+
+          <div class="rowBetween">
+            <span class="pill">Em breve: integração</span>
+            <button class="btn btnGhost" id="btnReset" type="button">
+              Resetar dados deste aparelho
+            </button>
+          </div>
+
+          <div class="hr"></div>
+
+          <button class="btn btnPrimary" id="btnValidar" type="button">
+            Validar pontos
+          </button>
+        </div>
+
+        <footer>Espaço Vip • Fidelidade exclusiva no app</footer>
+      </section>
+
+      <!-- BENEFÍCIOS -->
+      <section class="panel" id="tab-beneficios">
+        <div class="card">
+          <h2 class="sectionTitle">Benefícios</h2>
+          <ul class="steps">
+            <li>Promoções exclusivas para quem usa o app</li>
+            <li>Indicação de amigas com pontos</li>
+            <li>Resgates de segunda a quarta (conforme disponibilidade)</li>
+          </ul>
+
+          <div class="hr"></div>
+
+          <button class="btn btnPrimary" id="btnWhats2" type="button">
+            Falar comigo no WhatsApp
+          </button>
+        </div>
+
+        <footer>Espaço Vip • Fidelidade exclusiva no app</footer>
+      </section>
+    </main>
+
+    <!-- JS -->
+    <script src="app.js"></script>
+
+    <!-- Tabs handler (fica no index) -->
+    <script>
+      (function () {
+        const tabs = document.querySelectorAll(".tab");
+        const panels = {
+          home: document.getElementById("tab-home"),
+          promos: document.getElementById("tab-promos"),
+          indicacao: document.getElementById("tab-indicacao"),
+          pontos: document.getElementById("tab-pontos"),
+          beneficios: document.getElementById("tab-beneficios"),
+        };
+
+        function show(tab) {
+          tabs.forEach((t) => t.classList.toggle("active", t.dataset.tab === tab));
+          Object.entries(panels).forEach(([k, el]) => {
+            if (!el) return;
+            el.classList.toggle("show", k === tab);
+          });
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+
+        tabs.forEach((t) => t.addEventListener("click", () => show(t.dataset.tab)));
+      })();
+    </script>
+
+    <!-- Service Worker (PWA) -->
+    <script>
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.register("./service-worker.js").catch(() => {});
+      }
+    </script>
+  </body>
 </html>
