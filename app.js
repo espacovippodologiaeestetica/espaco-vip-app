@@ -1,3 +1,4 @@
+alert("app.js carregou ✅");
 document.addEventListener("DOMContentLoaded", () => {
   // ====== CONFIGURE AQUI ======
   const AGENDA_URL =
