@@ -457,14 +457,12 @@
       </section>
     </main>
 
-    <!-- JS (IMPORTANTE: ./ + defer + versão pra quebrar cache) -->
-    <script src="./app.js?v=20260208" defer></script>
+  <!-- JS -->
+<script src="./app.js?v=20260208-1" defer></script>
 
-    <!-- Service Worker (PWA) -->
-    <script>
-      if ("serviceWorker" in navigator) {
-        navigator.serviceWorker.register("./service-worker.js").catch(() => {});
-      }
-    </script>
-  </body>
-</html>
+<!-- Service Worker (PWA) -->
+<script>
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("./service-worker.js?v=20260208-1").catch(() => {});
+  }
+</script>
