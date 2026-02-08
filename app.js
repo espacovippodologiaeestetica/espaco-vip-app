@@ -1,171 +1,130 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // ===== CONFIGURE AQUI =====
+  // ====== CONFIGURE AQUI ======
+  // IMPORTANTE: use o link público do CLIENTE (não o login do profissional)
   const AGENDA_URL =
-    "http://www.simplesagenda.com.br/agendamento_m.php?id=102e333dd822c1d9e0592ecf075e4bf4";
+    "https://www.simplesagenda.com.br/agendamento_m.php?id=10e2333dd822c1d9e0592ecf075e4bf4";
 
   // Seu número com DDI +55 e DDD, só números:
   const WHATS_NUMERO = "5541992297612";
 
+  // Mensagem padrão do botão "Falar comigo"
   const MSG_FALAR_COMIGO =
     "Olá! Vim pelo APP Espaço Vip e quero informações/agenda. 💗";
-  // ==========================
+  // ============================
 
-  // ---------- Navegação segura (evita bloqueio de pop-up) ----------
-  function abrirUrl(url) {
-    // Em celular/PWA, window.open pode ser bloqueado. Então usamos navegação direta.
-    window.location.assign(url);
+  function openUrl(url) {
+    // Mais compatível com PWA/celular (evita bloqueio de pop-up)
+    window.location.href = url;
   }
 
   function abrirAgenda() {
-    abrirUrl(AGENDA_URL);
+    openUrl(AGENDA_URL);
   }
 
   function abrirWhats(mensagem) {
     const url =
       "https://wa.me/" + WHATS_NUMERO + "?text=" + encodeURIComponent(mensagem);
-    abrirUrl(url);
+    openUrl(url);
   }
 
-  // ---------- Bind universal ----------
-  function bind(id, handler) {
+  function bindClick(id, handler) {
     const el = document.getElementById(id);
     if (!el) return;
+
     el.addEventListener("click", (e) => {
-      // Só previne se for link
-      if (el.tagName === "A") e.preventDefault();
+      e.preventDefault();
       handler();
     });
   }
 
-  // ---------- Tabs ----------
-  const tabButtons = Array.from(document.querySelectorAll(".tab[data-tab]"));
-  const panels = {
-    home: document.getElementById("tab-home"),
-    promos: document.getElementById("tab-promos"),
-    indicacao: document.getElementById("tab-indicacao"),
-    pontos: document.getElementById("tab-pontos"),
-    beneficios: document.getElementById("tab-beneficios"),
-  };
-
-  function showTab(name) {
-    tabButtons.forEach((b) => b.classList.toggle("active", b.dataset.tab === name));
-    Object.entries(panels).forEach(([key, el]) => {
-      if (!el) return;
-      el.classList.toggle("show", key === name);
-    });
+  // ====== Abas (tabs) ======
+  function openTab(tabName) {
+    const tabBtn = document.querySelector([data-tab="${tabName}"]);
+    if (tabBtn) tabBtn.click();
   }
 
-  tabButtons.forEach((btn) => {
-    btn.addEventListener("click", () => showTab(btn.dataset.tab));
-  });
+  // ====== HOME ======
+  bindClick("btnAgenda", abrirAgenda);
 
-  // Garantia: inicia em "home"
-  showTab("home");
+  bindClick("btnWhats", () => abrirWhats(MSG_FALAR_COMIGO));
 
-  // ---------- HOME ----------
-  bind("btnAgenda", abrirAgenda);
+  bindClick("btnGoPromos", () => openTab("promos"));
 
-  bind("btnWhats", () => abrirWhats(MSG_FALAR_COMIGO));
+  // ====== INDICAÇÃO (atalho agenda) ======
+  bindClick("btnAbrirAgenda2", abrirAgenda);
 
-  bind("btnGoPromos", () => showTab("promos"));
-
-  // ---------- PROMOÇÕES ----------
-  bind("promoSegunda", () => {
+  // ====== PROMOÇÕES (NOVAS) ======
+  bindClick("promoSegunda", () => {
     abrirWhats(
-      "Olá! Quero ativar a promoção de Segunda no APP Espaço Vip:\n" +
-        "- Manicure R$25\n" +
-        "- Manicure esmaltação em gel R$50\n" +
-        "- Pedicure esmaltação em gel R$60\n" +
-        "- SPA dos pés com pedicure R$99,90\n\n" +
+      "Olá! Quero ativar a promoção de Segunda-feira no APP Espaço Vip:\n" +
+        "- Manicure e pedicure R$55\n" +
+        "- Manicure e pedicure com esmaltação em gel R$130 (ganha SPA do pé)\n\n" +
         "Pode me passar os horários disponíveis?"
     );
   });
 
-  bind("promoTerca", () => {
+  bindClick("promoTerca", () => {
     abrirWhats(
-      "Olá! Quero ativar a promoção de Terça no APP Espaço Vip:\n" +
-        "- Design de Sobrancelhas R$25\n" +
-        "- Designer e Henna R$40\n" +
-        "- Brow lamination R$80\n\n" +
-        "Pode me passar os horários?"
-    );
-  });
-
-  bind("promoQuarta", () => {
-    abrirWhats(
-      "Olá! Quero ativar a promoção de Quarta no APP Espaço Vip:\n" +
-        "- Limpeza de pele intensa R$100\n" +
-        "- Limpeza de pele ultrassônica R$140\n" +
-        "- Limpeza de pele peeling de diamante R$80\n\n" +
-        "Quero agendar, quais horários?"
-    );
-  });
-
-  bind("promoQuinta", () => {
-    abrirWhats(
-      "Olá! Quero ativar a promoção de Quinta no APP Espaço Vip:\n" +
+      "Olá! Quero ativar a promoção de Terça-feira no APP Espaço Vip:\n" +
         "- Depilação íntima completa R$50\n" +
-        "- Depilação completa (perna/coxa, íntima, axilas) R$110\n\n" +
-        "Pode me passar os horários?"
+        "- Depilação completa R$130 (perna completa, íntima completa, linha alba e axilas)\n" +
+        "- Designer de sobrancelhas + buço R$38\n\n" +
+        "Pode me passar os horários disponíveis?"
     );
   });
 
-  bind("promoSexta", () => {
+  bindClick("promoQuarta", () => {
     abrirWhats(
-      "Olá! Quero ativar a promoção de Sexta no APP Espaço Vip:\n" +
-        "- Bronzeamento R$90 (sem biquíni de fita) — cliente traz biquíni\n" +
-        "- 3 sessões R$250\n" +
-        "- Bronzeamento com fita R$120\n" +
-        "- 3 sessões R$330\n\n" +
-        "Quero agendar, quais horários?"
+      "Olá! Quero ativar a promoção de Quarta-feira no APP Espaço Vip:\n" +
+        "- Limpeza de pele R$99,99\n" +
+        "- Peeling de diamante R$50 (não tem extração)\n\n" +
+        "Quero agendar. Quais horários?"
     );
   });
 
-  bind("promoCarnaval", () => {
+  bindClick("promoQuinta", () => {
     abrirWhats(
-      "Olá! Quero ativar a Campanha de Fevereiro (Carnaval) no APP Espaço Vip:\n" +
-        "- Bronzeamento 4 sessões R$400\n" +
-        "- Massagem modeladora 8 sessões R$480\n" +
-        "- Drenagem linfática 4 sessões R$450\n\n" +
-        "Obs: pacotes pagos na 1ª sessão (valor total). Não acumulativo.\n" +
-        "Pode me orientar e passar os horários?"
+      "Olá! Quero ativar a promoção de Quinta-feira no APP Espaço Vip:\n" +
+        "- Bronzeamento artificial R$90 (biquíni da cliente)\n" +
+        "- Bronzeamento com biquíni de fita R$118\n" +
+        "- Bronzeamento + massagem R$150\n\n" +
+        "Pode me passar os horários disponíveis?"
     );
   });
 
-  // ---------- INDICAÇÃO (COMPARTILHAR COM A AMIGA) ----------
-  bind("btnIndicar", async () => {
-    const codigo = (document.getElementById("meuCodigo")?.innerText || "VIP-0000").trim();
-
-    const linkApp = window.location.origin + window.location.pathname;
-
-    const texto =
-      "Oi! 💕 Conheci o Espaço Vip e lembrei de você!\n\n" +
-      "Instale o app e veja promoções/benefícios:\n" + linkApp + "\n\n" +
-      "Use meu código: " + codigo + "\n\n" +
-      "Qualquer dúvida me chama!";
-
-    // Se suportar “Compartilhar” (Android/iOS)
-    if (navigator.share) {
-      try {
-        await navigator.share({ text: texto });
-        return;
-      } catch (e) {
-        // se cancelar, cai no fallback abaixo
-      }
-    }
-
-    // Fallback: abre WhatsApp “para escolher contato”
-    abrirUrl("https://wa.me/?text=" + encodeURIComponent(texto));
+  // ====== CAMPANHA DO MÊS (deixe como “genérico” pra você trocar quando quiser) ======
+  bindClick("promoCarnaval", () => {
+    abrirWhats(
+      "Olá! Vim pelo APP Espaço Vip e quero informações sobre a campanha do mês.\n\n" +
+        "Pode me explicar como funciona e quais horários disponíveis?"
+    );
   });
 
-  bind("btnCopiarCodigo", async () => {
-    const codigo = (document.getElementById("meuCodigo")?.innerText || "").trim();
+  // ====== INDICAÇÃO ======
+  bindClick("btnIndicar", () => {
+    const codigoEl = document.getElementById("meuCodigo");
+    const codigo = (codigoEl ? codigoEl.innerText : "").trim() || "VIP-0000";
+
+    // Indicação sempre vai para VOCÊ (seu Whats), com texto pronto do cliente
+    abrirWhats(
+      "Olá! Vim pelo APP Espaço Vip. 💕\n\n" +
+        "Quero indicar uma amiga e participar da fidelidade.\n" +
+        "Meu código: " +
+        codigo +
+        "\n\n" +
+        "Como faço?"
+    );
+  });
+
+  bindClick("btnCopiarCodigo", async () => {
+    const codigoEl = document.getElementById("meuCodigo");
+    const codigo = (codigoEl ? codigoEl.innerText : "").trim();
     if (!codigo) return;
 
     try {
       await navigator.clipboard.writeText(codigo);
       alert("Código copiado: " + codigo);
-    } catch {
+    } catch (e) {
       const input = document.createElement("textarea");
       input.value = codigo;
       document.body.appendChild(input);
@@ -176,20 +135,18 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  bind("btnAbrirAgenda2", abrirAgenda);
-
-  // ---------- PONTOS ----------
-  bind("btnValidar", () => {
+  // ====== PONTOS ======
+  bindClick("btnValidar", () => {
     alert("Validação manual: depois conectamos com seu controle real.");
   });
 
-  bind("btnReset", () => {
+  bindClick("btnReset", () => {
     if (confirm("Quer resetar os dados deste aparelho?")) {
       localStorage.clear();
       location.reload();
     }
   });
 
-  // ---------- BENEFÍCIOS ----------
-  bind("btnWhats2", () => abrirWhats(MSG_FALAR_COMIGO));
+  // ====== BENEFÍCIOS ======
+  bindClick("btnWhats2", () => abrirWhats(MSG_FALAR_COMIGO));
 });
