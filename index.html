@@ -457,33 +457,8 @@
       </section>
     </main>
 
-    <!-- JS -->
-    <script src="app.js"></script>
-
-    <!-- Tabs handler (fica no index) -->
-    <script>
-      (function () {
-        const tabs = document.querySelectorAll(".tab");
-        const panels = {
-          home: document.getElementById("tab-home"),
-          promos: document.getElementById("tab-promos"),
-          indicacao: document.getElementById("tab-indicacao"),
-          pontos: document.getElementById("tab-pontos"),
-          beneficios: document.getElementById("tab-beneficios"),
-        };
-
-        function show(tab) {
-          tabs.forEach((t) => t.classList.toggle("active", t.dataset.tab === tab));
-          Object.entries(panels).forEach(([k, el]) => {
-            if (!el) return;
-            el.classList.toggle("show", k === tab);
-          });
-          window.scrollTo({ top: 0, behavior: "smooth" });
-        }
-
-        tabs.forEach((t) => t.addEventListener("click", () => show(t.dataset.tab)));
-      })();
-    </script>
+    <!-- JS (IMPORTANTE: ./ + defer + versão pra quebrar cache) -->
+    <script src="./app.js?v=20260208" defer></script>
 
     <!-- Service Worker (PWA) -->
     <script>
